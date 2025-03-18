@@ -1,0 +1,324 @@
+/* styles.css */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.cheatsheet-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1020;
+}
+
+.sidebar {
+  height: 100vh;
+  position: fixed;
+  width: 250px;
+  transition: transform 0.3s ease;
+  top: 56px; /* Adjust for banner height */
+  z-index: 1010;
+  overflow-y: auto; /* Allow scrolling within sidebar */
+  -webkit-overflow-scrolling: touch; /* Better scrolling on iOS */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.active {
+  transform: translateX(-250px);
+}
+
+.main-content {
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+  margin-top: 56px; /* Adjust for banner height */
+}
+
+.sidebar-toggle {
+  position: fixed;
+  top: 70px; /* Adjust for banner height */
+  left: 10px;
+  z-index: 1030; /* Higher than other elements */
+  display: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  padding: 0;
+  line-height: 45px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Overlay to close sidebar when clicked outside on mobile */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1005;
+  display: none;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-250px);
+    top: 56px; /* Adjust for banner height */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Stronger shadow for visibility */
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding-top: 20px; /* Add some space at the top */
+  }
+
+  .sidebar-toggle {
+    display: block;
+    transition: left 0.3s ease;
+  }
+  
+  .sidebar-toggle.active {
+    left: 260px; /* Move toggle button when sidebar is open */
+  }
+}
+
+/* Make sure the toggle button is accessible on small screens */
+@media (max-width: 350px) {
+  .sidebar-toggle {
+    top: 65px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 0.9rem;
+  }
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.code-block {
+  position: relative;
+  background: #2c3e50;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.btn-copy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-copy:hover {
+  background-color: #16a085;
+}
+
+pre {
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+footer {
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  footer {
+    margin-left: 0;
+  }
+}
+
+/* Highlight active link in sidebar */
+.sidebar .nav-link.active {
+  font-weight: bold;
+  color: #1abc9c !important;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Search box styles */
+.sidebar .input-group {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sidebar .input-group input {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+}
+
+.sidebar .input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.sidebar .input-group .btn {
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.sidebar .input-group .btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Progress bar styles */
+.sidebar .progress {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sidebar .progress-bar {
+  transition: width 0.3s ease;
+}
+
+/* Completed unit styles */
+.sidebar .nav-link.completed {
+  position: relative;
+  padding-right: 2rem;
+}
+
+.sidebar .nav-link.completed i {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+}
+
+/* Improved code block styles */
+.code-block pre {
+  margin: 0;
+  padding: 1rem;
+}
+
+.code-block:hover .btn-copy {
+  opacity: 1;
+}
+
+/* Make code blocks responsive */
+@media (max-width: 576px) {
+  .code-block {
+    margin-left: -15px;
+    margin-right: -15px;
+    border-radius: 0;
+  }
+  
+  pre {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Improved accessibility for keyboard navigation */
+.nav-link:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Ensure proper touch targets for mobile */
+@media (max-width: 768px) {
+  .nav-link,
+  .btn {
+    padding: 0.75rem 1rem;
+  }
+  
+  .mc-option {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+}
+
+/* Print styles improvements */
+@media print {
+  .card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .code-block {
+    border: 1px solid #ddd;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .card {
+    background-color: #2d2d2d;
+  }
+
+  pre {
+    background-color: #1a1a1a;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fix for iOS Safari issues with position: fixed */
+@supports (-webkit-overflow-scrolling: touch) {
+  .sidebar {
+    position: absolute;
+  }
+
+  .sidebar-toggle {
+    position: absolute;
+  }
+  
+  .cheatsheet-banner {
+    position: absolute;
+  }
+}

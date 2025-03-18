@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 5: Writing Classes</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Prism.js CSS for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Loading indicator */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 5px;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Multiple choice options */
+    .mc-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .mc-option {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .mc-option:hover {
+      background-color: #f8f9fa;
+    }
+    .mc-option.selected {
+      background-color: #e9ecef;
+      border-color: #6c757d;
+    }
+    .mc-option.correct {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+    .mc-option.incorrect {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+    .explanation {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #f8f9fa;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Indicator -->
+  <div class="loading" id="loading">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Cheatsheet Banner -->
+  <div class="cheatsheet-banner bg-primary text-white text-center p-2">
+    <h3 class="mb-0">AP Computer Science A Unit Cheatsheet</h3>
+  </div>
+
+  <!-- Sidebar Toggle Button -->
+  <button class="btn btn-primary sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 col-lg-2 sidebar bg-dark text-white" id="sidebar">
+        <h2 class="p-3">Units</h2>
+        <!-- Progress Bar -->
+        <div class="px-3 mb-3">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 10%" id="progressBar"></div>
+          </div>
+          <small class="text-muted mt-1 d-block">Progress: <span id="progressText">10%</span></small>
+        </div>
+        <ul class="nav flex-column" id="unitList">
+          <li class="nav-item"><a href="unit1.html" class="nav-link">Unit 1: Primitive Types</a></li>
+          <li class="nav-item"><a href="unit2.html" class="nav-link">Unit 2: Using Objects</a></li>
+          <li class="nav-item"><a href="unit3.html" class="nav-link">Unit 3: Boolean Expressions</a></li>
+          <li class="nav-item"><a href="unit4.html" class="nav-link">Unit 4: Iteration</a></li>
+          <li class="nav-item"><a href="unit5.html" class="nav-link">Unit 5: Writing Classes</a></li>
+          <li class="nav-item"><a href="unit6.html" class="nav-link">Unit 6: Arrays</a></li>
+          <li class="nav-item"><a href="unit7.html" class="nav-link">Unit 7: ArrayList</a></li>
+          <li class="nav-item"><a href="unit8.html" class="nav-link">Unit 8: 2D Arrays</a></li>
+          <li class="nav-item"><a href="unit9.html" class="nav-link">Unit 9: Inheritance</a></li>
+          <li class="nav-item"><a href="unit10.html" class="nav-link">Unit 10: Recursion</a></li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-md-9 col-lg-10 main-content p-4 animate__animated animate__fadeIn">
+        <h1 class="mb-4">Unit 5: Writing Classes</h1>
+        <p class="lead">This unit covers the fundamentals of object-oriented programming, including class design, constructors, methods, and encapsulation.</p>
+
+        <!-- Key Concepts -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Key Concepts</h2>
+            <ul>
+              <li><strong>Class Structure</strong>: Components of a class</li>
+              <li><strong>Instance Variables</strong>: Object attributes</li>
+              <li><strong>Constructors</strong>: Object initialization</li>
+              <li><strong>Methods</strong>: Object behaviors</li>
+              <li><strong>Access Modifiers</strong>: public, private, protected</li>
+              <li><strong>Encapsulation</strong>: Data hiding and accessors</li>
+              <li><strong>Method Overloading</strong>: Multiple method signatures</li>
+              <li><strong>this Keyword</strong>: Referring to current object</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Example Code -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Example Code</h2>
+            <div class="code-block">
+              <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
+              <pre><code class="language-java">
+// Example: Writing Classes in Java
+public class Student {
+  // Instance variables (private for encapsulation)
+  private String name;
+  private int age;
+  private double gpa;
+  
+  // Constructor
+  public Student(String name, int age) {
+    this.name = name;
+    this.age = age;
+    this.gpa = 0.0;
+  }
+  
+  // Overloaded constructor
+  public Student(String name, int age, double gpa) {
+    this.name = name;
+    this.age = age;
+    this.gpa = gpa;
+  }
+  
+  // Accessor methods (getters)
+  public String getName() {
+    return name;
+  }
+  
+  public int getAge() {
+    return age;
+  }
+  
+  public double getGpa() {
+    return gpa;
+  }
+  
+  // Mutator methods (setters)
+  public void setName(String name) {
+    this.name = name;
+  }
+  
+  public void setAge(int age) {
+    if (age >= 0) {
+      this.age = age;
+    }
+  }
+  
+  public void setGpa(double gpa) {
+    if (gpa >= 0.0 && gpa <= 4.0) {
+      this.gpa = gpa;
+    }
+  }
+  
+  // Other methods
+  public void study() {
+    gpa += 0.1;
+    if (gpa > 4.0) gpa = 4.0;
+  }
+  
+  @Override
+  public String toString() {
+    return "Student[name=" + name + ", age=" + age + ", gpa=" + gpa + "]";
+  }
+}
+
+// Main class to test Student
+public class StudentTest {
+  public static void main(String[] args) {
+    Student student1 = new Student("John", 18);
+    Student student2 = new Student("Jane", 19, 3.8);
+    
+    System.out.println(student1);
+    System.out.println(student2);
+    
+    student1.study();
+    System.out.println("After studying: " + student1);
+  }
+}
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Practice Problems -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Practice Problems</h2>
+            <ol>
+              <li>Create a BankAccount class with methods for deposits, withdrawals, and balance checking.</li>
+              <li>Design a Rectangle class with methods to calculate area, perimeter, and check if it's a square.</li>
+              <li>Implement a Time class that handles hours, minutes, and seconds with appropriate validation.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Tips for Success -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Tips for Success</h2>
+            <ul>
+              <li>Always use proper encapsulation with private instance variables.</li>
+              <li>Include appropriate constructors for object initialization.</li>
+              <li>Validate data in mutator methods.</li>
+              <li>Use meaningful method and variable names.</li>
+              <li>Include toString() method for debugging.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center p-3">
+    <p class="mb-0">© 2024-2025 Hasan ASLAN, AP Computer Science A Course | 
+      <a href="https://github.com/itshasanaslan" target="_blank" class="text-white">GitHub</a>
+    </p>
+  </footer>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // Show loading indicator
+    window.addEventListener('load', function() {
+      const loading = document.getElementById('loading');
+      loading.style.display = 'none';
+    });
+
+    // Function to toggle the sidebar
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+
+    // Function to copy code to clipboard
+    function copyCode(button) {
+      const codeBlock = button.parentElement.querySelector('code');
+      const code = codeBlock.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip-text';
+        tooltip.textContent = 'Copied!';
+        button.appendChild(tooltip);
+        setTimeout(() => tooltip.remove(), 2000);
+      }).catch(() => {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip-text';
+        tooltip.textContent = 'Failed to copy';
+        button.appendChild(tooltip);
+        setTimeout(() => tooltip.remove(), 2000);
+      });
+    }
+
+    // Function to handle multiple choice selection
+    function selectOption(option, isCorrect) {
+      const question = option.parentElement;
+      const options = question.querySelectorAll('.mc-option');
+      const explanation = question.querySelector('.explanation');
+      
+      // Remove previous selections
+      options.forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'incorrect');
+      });
+      
+      // Add selection
+      option.classList.add('selected');
+      
+      // Show result
+      if (isCorrect) {
+        option.classList.add('correct');
+        explanation.style.display = 'block';
+      } else {
+        option.classList.add('incorrect');
+      }
+    }
+
+    // Function to highlight the active link in the sidebar
+    function highlightActiveLink() {
+      const currentPage = window.location.pathname.split("/").pop();
+      const links = document.querySelectorAll('.sidebar .nav-link');
+      links.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Initialize
+    highlightActiveLink();
+
+    // Progress tracking
+    function updateProgress() {
+      const completedUnits = localStorage.getItem('completedUnits') || '[]';
+      const completed = JSON.parse(completedUnits);
+      const totalUnits = document.querySelectorAll('#unitList .nav-link').length;
+      const progress = (completed.length / totalUnits) * 100;
+      
+      document.getElementById('progressBar').style.width = `${progress}%`;
+      document.getElementById('progressText').textContent = `${Math.round(progress)}%`;
+      
+      // Update completed units styling
+      document.querySelectorAll('#unitList .nav-link').forEach(link => {
+        const unitNumber = link.getAttribute('href').replace('unit', '').replace('.html', '');
+        if (completed.includes(unitNumber)) {
+          link.classList.add('completed');
+          link.innerHTML += ' <i class="fas fa-check-circle text-success"></i>';
+        }
+      });
+    }
+
+    // Mark current unit as completed
+    function markUnitAsCompleted() {
+      const currentUnit = window.location.pathname.split('/').pop().replace('unit', '').replace('.html', '');
+      const completedUnits = JSON.parse(localStorage.getItem('completedUnits') || '[]');
+      
+      if (!completedUnits.includes(currentUnit)) {
+        completedUnits.push(currentUnit);
+        localStorage.setItem('completedUnits', JSON.stringify(completedUnits));
+        updateProgress();
+      }
+    }
+
+    // Initialize progress
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      markUnitAsCompleted();
+    });
+  </script>
+  
+  <!-- Dynamic paths for GitHub Pages -->
+  <script src="dynamic-paths.js"></script>
+</body>
+</html> 

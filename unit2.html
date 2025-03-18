@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 2: Using Objects</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Prism.js CSS for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #1abc9c;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .copy-tooltip {
+      position: absolute;
+      background: #333;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .copy-tooltip.show {
+      opacity: 1;
+    }
+    .mc-option {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .mc-option:hover {
+      background-color: #f8f9fa;
+    }
+    .mc-option.selected {
+      border-color: #28a745;
+      background-color: rgba(40, 167, 69, 0.1);
+    }
+    .mc-option.correct {
+      border-color: #28a745;
+      background-color: rgba(40, 167, 69, 0.1);
+    }
+    .mc-option.incorrect {
+      border-color: #dc3545;
+      background-color: rgba(220, 53, 69, 0.1);
+    }
+    .explanation {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cheatsheet Banner -->
+  <div class="cheatsheet-banner bg-primary text-white text-center p-2">
+    <h3 class="mb-0">AP Computer Science A Unit Cheatsheet</h3>
+  </div>
+
+  <!-- Sidebar Toggle Button -->
+  <button class="btn btn-primary sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 col-lg-2 sidebar bg-dark text-white" id="sidebar">
+        <h2 class="p-3">Units</h2>
+        <!-- Progress Bar -->
+        <div class="px-3 mb-3">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 10%" id="progressBar"></div>
+          </div>
+          <small class="text-muted mt-1 d-block">Progress: <span id="progressText">10%</span></small>
+        </div>
+        <ul class="nav flex-column" id="unitList">
+          <li class="nav-item"><a href="unit1.html" class="nav-link">Unit 1: Primitive Types</a></li>
+          <li class="nav-item"><a href="unit2.html" class="nav-link">Unit 2: Using Objects</a></li>
+          <li class="nav-item"><a href="unit3.html" class="nav-link">Unit 3: Boolean Expressions</a></li>
+          <li class="nav-item"><a href="unit4.html" class="nav-link">Unit 4: Iteration</a></li>
+          <li class="nav-item"><a href="unit5.html" class="nav-link">Unit 5: Writing Classes</a></li>
+          <li class="nav-item"><a href="unit6.html" class="nav-link">Unit 6: Arrays</a></li>
+          <li class="nav-item"><a href="unit7.html" class="nav-link">Unit 7: ArrayList</a></li>
+          <li class="nav-item"><a href="unit8.html" class="nav-link">Unit 8: 2D Arrays</a></li>
+          <li class="nav-item"><a href="unit9.html" class="nav-link">Unit 9: Inheritance</a></li>
+          <li class="nav-item"><a href="unit10.html" class="nav-link">Unit 10: Recursion</a></li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-md-9 col-lg-10 main-content p-4 animate__animated animate__fadeIn">
+        <h1 class="mb-4">Unit 2: Using Objects</h1>
+        <p class="lead">This unit focuses on object-oriented programming (OOP) concepts in Java, including classes, objects, methods, and the <code>String</code> class.</p>
+
+        <!-- Key Concepts -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Key Concepts</h2>
+            <ul>
+              <li><strong>Objects and Classes</strong>: A class is a blueprint for creating objects.</li>
+              <li><strong>Methods</strong>: Define the behavior of an object.</li>
+              <li><strong>Constructors</strong>: Special methods used to initialize objects.</li>
+              <li><strong>String Class</strong>: Used to manipulate text with methods like <code>length()</code>, <code>substring()</code>, and <code>equals()</code>.</li>
+              <li><strong>Wrapper Classes</strong>: Convert primitive data types into objects (e.g., <code>Integer</code>, <code>Double</code>).</li>
+              <li><strong>Null References</strong>: A reference that does not point to any object.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Example Code -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Example Code: Basic Objects</h2>
+            <div class="code-block">
+              <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
+              <pre><code class="language-java">
+// Example: Using Objects in Java
+public class UsingObjectsExample {
+  public static void main(String[] args) {
+    // Create a String object
+    String name = new String("Emily Johnson");
+
+    // Use String methods
+    int length = name.length(); // Get the length of the string
+    String substring = name.substring(0, 5); // Extract "Emily"
+    int index = name.indexOf("Johnson"); // Find the index of "Johnson"
+    boolean isEqual = name.equals("Emily Johnson"); // Compare strings
+
+    // Output results
+    System.out.println("Length: " + length);
+    System.out.println("Substring: " + substring);
+    System.out.println("Index of 'Johnson': " + index);
+    System.out.println("Is equal to 'Emily Johnson'? " + isEqual);
+
+    // Wrapper class example
+    Integer num = new Integer(42); // Create an Integer object
+    int primitiveNum = num.intValue(); // Convert to primitive type
+    System.out.println("Primitive value: " + primitiveNum);
+  }
+}
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Code: Advanced Objects -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Example Code: Advanced Objects</h2>
+            <div class="code-block">
+              <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
+              <pre><code class="language-java">
+// Example: Advanced Object Operations in Java
+public class AdvancedObjectsExample {
+    public static void main(String[] args) {
+        // String manipulation
+        String text = "Hello, World!";
+        String reversed = reverseString(text);
+        String[] words = text.split(" ");
+        
+        // StringBuilder example
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hello");
+        sb.append(" ");
+        sb.append("World");
+        String result = sb.toString();
+        
+        // Wrapper class operations
+        Double d1 = Double.valueOf("3.14");
+        Double d2 = Double.valueOf(2.718);
+        Double sum = d1 + d2; // Auto-unboxing
+        
+        // Null handling
+        String nullString = null;
+        if (nullString != null) {
+            System.out.println("Length: " + nullString.length());
+        } else {
+            System.out.println("String is null");
+        }
+        
+        // Print results
+        System.out.println("Reversed: " + reversed);
+        System.out.println("Words: " + String.join(", ", words));
+        System.out.println("StringBuilder result: " + result);
+        System.out.println("Sum of doubles: " + sum);
+    }
+    
+    private static String reverseString(String str) {
+        StringBuilder reversed = new StringBuilder(str);
+        return reversed.reverse().toString();
+    }
+}
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple Choice Practice -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Multiple Choice Practice</h2>
+            
+            <!-- Question 1 -->
+            <div class="question mb-4">
+              <h4>Question 1:</h4>
+              <p>What is the output of the following code?</p>
+              <pre><code class="language-java">
+String str1 = "Hello";
+String str2 = "Hello";
+String str3 = new String("Hello");
+System.out.println(str1 == str2);
+System.out.println(str1 == str3);
+              </code></pre>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. true true</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">B. true false</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">C. false true</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">D. false false</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. Compilation error</div>
+              </div>
+              <div class="explanation" id="explanation1">
+                <strong>Explanation:</strong> The answer is B. String literals are stored in the string pool, so str1 and str2 refer to the same object. However, new String() creates a new object, so str3 refers to a different object.
+              </div>
+            </div>
+            
+            <!-- Question 2 -->
+            <div class="question mb-4">
+              <h4>Question 2:</h4>
+              <p>Which of the following is NOT a wrapper class in Java?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. Integer</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">B. Double</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">C. Boolean</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">D. String</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. Character</div>
+              </div>
+              <div class="explanation" id="explanation2">
+                <strong>Explanation:</strong> The answer is D. String is a class but not a wrapper class. Wrapper classes are used to wrap primitive types into objects (e.g., Integer wraps int, Double wraps double).
+              </div>
+            </div>
+            
+            <!-- Question 3 -->
+            <div class="question mb-4">
+              <h4>Question 3:</h4>
+              <p>What is the result of the following code?</p>
+              <pre><code class="language-java">
+String str = "Hello World";
+System.out.println(str.substring(6, 11));
+              </code></pre>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. Hello</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">B. World</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">C. Hello W</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">D. World!</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. StringIndexOutOfBoundsException</div>
+              </div>
+              <div class="explanation" id="explanation3">
+                <strong>Explanation:</strong> The answer is B. substring(6, 11) extracts characters from index 6 (inclusive) to index 11 (exclusive), which gives "World".
+              </div>
+            </div>
+            
+            <!-- Question 4 -->
+            <div class="question mb-4">
+              <h4>Question 4:</h4>
+              <p>Which method is used to compare two strings in Java?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. compare()</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">B. ==</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">C. equals()</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">D. compareTo()</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. equalsIgnoreCase()</div>
+              </div>
+              <div class="explanation" id="explanation4">
+                <strong>Explanation:</strong> The answer is C. equals() is the standard method for comparing the contents of two strings. The == operator compares object references, not string contents.
+              </div>
+            </div>
+            
+            <!-- Question 5 -->
+            <div class="question mb-4">
+              <h4>Question 5:</h4>
+              <p>What happens when you try to call a method on a null object?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. The program continues normally</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">B. A compilation error occurs</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">C. A NullPointerException is thrown</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">D. The method returns null</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. The program crashes without an exception</div>
+              </div>
+              <div class="explanation" id="explanation5">
+                <strong>Explanation:</strong> The answer is C. When you try to call a method on a null object, a NullPointerException is thrown at runtime.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Practice Problems -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Practice Problems</h2>
+            <ol>
+              <li>Write a program that takes a string as input and prints its length, first character, and last character.</li>
+              <li>Write a program that extracts and prints the middle three characters of a string.</li>
+              <li>Write a program that converts a <code>String</code> to an <code>Integer</code> and performs arithmetic operations.</li>
+              <li>Write a program that checks if a string is <code>null</code> and prints an appropriate message.</li>
+              <li>Write a program that compares two strings and prints whether they are equal.</li>
+              <li>Create a program that reverses a string using StringBuilder.</li>
+              <li>Write a program that counts the number of vowels in a string.</li>
+              <li>Create a program that converts a string to title case (first letter of each word capitalized).</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Tips for Success -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Tips for Success</h2>
+            <ul>
+              <li>Understand object-oriented concepts like classes, objects, and methods.</li>
+              <li>Practice using the <code>String</code> class and its methods.</li>
+              <li>Learn how to handle <code>null</code> references to avoid runtime errors.</li>
+              <li>Use wrapper classes to convert between primitive types and objects.</li>
+              <li>Write clean, readable code with meaningful variable names and comments.</li>
+              <li>Remember that String objects are immutable - use StringBuilder for string manipulation.</li>
+              <li>Be careful with string comparison - use equals() instead of == for content comparison.</li>
+              <li>Understand the difference between primitive types and their wrapper classes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="row mt-4 mb-5">
+          <div class="col-6">
+            <a href="unit1.html" class="btn btn-primary w-100">← Previous Unit: Primitive Types</a>
+          </div>
+          <div class="col-6">
+            <a href="unit3.html" class="btn btn-primary w-100">Next Unit: Boolean Expressions →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center p-3">
+    <p class="mb-0">© 2024-2025 Hasan ASLAN, AP Computer Science A Course | 
+      <a href="https://github.com/itshasanaslan" target="_blank" class="text-white">GitHub</a>
+    </p>
+  </footer>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // Show loading indicator
+    window.addEventListener('load', function() {
+      document.getElementById('loadingIndicator').style.display = 'none';
+    });
+
+    // Function to toggle the sidebar
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+
+    // Improved copy code functionality
+    function copyCode(button) {
+      const codeBlock = button.parentElement.querySelector('code');
+      const code = codeBlock.innerText;
+      
+      // Create tooltip
+      const tooltip = document.createElement('div');
+      tooltip.className = 'copy-tooltip';
+      tooltip.textContent = 'Copied!';
+      button.appendChild(tooltip);
+      
+      navigator.clipboard.writeText(code).then(() => {
+        tooltip.classList.add('show');
+        setTimeout(() => {
+          tooltip.classList.remove('show');
+          setTimeout(() => tooltip.remove(), 300);
+        }, 2000);
+      }).catch(err => {
+        tooltip.textContent = 'Failed to copy';
+        tooltip.classList.add('show');
+        setTimeout(() => {
+          tooltip.classList.remove('show');
+          setTimeout(() => tooltip.remove(), 300);
+        }, 2000);
+      });
+    }
+
+    // Function to handle multiple choice selection
+    function selectOption(option, isCorrect) {
+      // Remove any previous selections
+      const options = option.parentElement.querySelectorAll('.mc-option');
+      options.forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'incorrect');
+      });
+      
+      // Mark the selected option
+      option.classList.add('selected');
+      
+      if (isCorrect) {
+        option.classList.add('correct');
+      } else {
+        option.classList.add('incorrect');
+      }
+      
+      // Show the explanation
+      const questionDiv = option.closest('.question');
+      const explanation = questionDiv.querySelector('.explanation');
+      explanation.style.display = 'block';
+    }
+
+    // Function to highlight the active link in the sidebar
+    function highlightActiveLink() {
+      const currentPage = window.location.pathname.split("/").pop();
+      const links = document.querySelectorAll('.sidebar .nav-link');
+
+      links.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Call the function when the page loads
+    highlightActiveLink();
+
+    // Progress tracking
+    function updateProgress() {
+      const completedUnits = localStorage.getItem('completedUnits') || '[]';
+      const completed = JSON.parse(completedUnits);
+      const totalUnits = document.querySelectorAll('#unitList .nav-link').length;
+      const progress = (completed.length / totalUnits) * 100;
+      
+      document.getElementById('progressBar').style.width = `${progress}%`;
+      document.getElementById('progressText').textContent = `${Math.round(progress)}%`;
+      
+      // Update completed units styling
+      document.querySelectorAll('#unitList .nav-link').forEach(link => {
+        const unitNumber = link.getAttribute('href').replace('unit', '').replace('.html', '');
+        if (completed.includes(unitNumber)) {
+          link.classList.add('completed');
+          link.innerHTML += ' <i class="fas fa-check-circle text-success"></i>';
+        }
+      });
+    }
+
+    // Mark current unit as completed
+    function markUnitAsCompleted() {
+      const currentUnit = window.location.pathname.split('/').pop().replace('unit', '').replace('.html', '');
+      const completedUnits = JSON.parse(localStorage.getItem('completedUnits') || '[]');
+      
+      if (!completedUnits.includes(currentUnit)) {
+        completedUnits.push(currentUnit);
+        localStorage.setItem('completedUnits', JSON.stringify(completedUnits));
+        updateProgress();
+      }
+    }
+
+    // Initialize progress
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      markUnitAsCompleted();
+    });
+  </script>
+  
+  <!-- Dynamic paths for GitHub Pages -->
+  <script src="dynamic-paths.js"></script>
+</body>
+</html>

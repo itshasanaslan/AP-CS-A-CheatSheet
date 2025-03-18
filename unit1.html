@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 1: Primitive Types</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Prism.js CSS for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #1abc9c;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .copy-tooltip {
+      position: absolute;
+      background: #333;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .copy-tooltip.show {
+      opacity: 1;
+    }
+    .mc-option {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .mc-option:hover {
+      background-color: #f8f9fa;
+    }
+    .mc-option.selected {
+      border-color: #28a745;
+      background-color: rgba(40, 167, 69, 0.1);
+    }
+    .mc-option.correct {
+      border-color: #28a745;
+      background-color: rgba(40, 167, 69, 0.1);
+    }
+    .mc-option.incorrect {
+      border-color: #dc3545;
+      background-color: rgba(220, 53, 69, 0.1);
+    }
+    .explanation {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Indicator -->
+  <div class="loading" id="loadingIndicator">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Cheatsheet Banner -->
+  <div class="cheatsheet-banner bg-primary text-white text-center p-2">
+    <h3 class="mb-0">AP Computer Science A Unit Cheatsheet</h3>
+  </div>
+
+  <!-- Sidebar Toggle Button -->
+  <button class="btn btn-primary sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Sidebar Overlay (for mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 col-lg-2 sidebar bg-dark text-white" id="sidebar">
+        <h2 class="p-3">Units</h2>
+        <!-- Progress Bar -->
+        <div class="px-3 mb-3">
+          <div class="progress" style="height: 5px;">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 10%" id="progressBar"></div>
+          </div>
+          <small class="text-muted mt-1 d-block">Progress: <span id="progressText">10%</span></small>
+        </div>
+        <ul class="nav flex-column" id="unitList">
+          <li class="nav-item"><a href="unit1.html" class="nav-link">Unit 1: Primitive Types</a></li>
+          <li class="nav-item"><a href="unit2.html" class="nav-link">Unit 2: Using Objects</a></li>
+          <li class="nav-item"><a href="unit3.html" class="nav-link">Unit 3: Boolean Expressions</a></li>
+          <li class="nav-item"><a href="unit4.html" class="nav-link">Unit 4: Iteration</a></li>
+          <li class="nav-item"><a href="unit5.html" class="nav-link">Unit 5: Writing Classes</a></li>
+          <li class="nav-item"><a href="unit6.html" class="nav-link">Unit 6: Arrays</a></li>
+          <li class="nav-item"><a href="unit7.html" class="nav-link">Unit 7: ArrayList</a></li>
+          <li class="nav-item"><a href="unit8.html" class="nav-link">Unit 8: 2D Arrays</a></li>
+          <li class="nav-item"><a href="unit9.html" class="nav-link">Unit 9: Inheritance</a></li>
+          <li class="nav-item"><a href="unit10.html" class="nav-link">Unit 10: Recursion</a></li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-md-9 col-lg-10 main-content p-4 animate__animated animate__fadeIn">
+        <h1 class="mb-4">Unit 1: Primitive Types</h1>
+        <p class="lead">This unit introduces the basics of programming in Java, focusing on fundamental data types, variables, and operations.</p>
+
+        <!-- Key Concepts -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Key Concepts</h2>
+            <ul>
+              <li><strong>Variables</strong>: Store data in a program.</li>
+              <li><strong>Primitive Data Types</strong>: <code>int</code>, <code>double</code>, <code>boolean</code>, <code>char</code>.</li>
+              <li><strong>Operators</strong>: Arithmetic, assignment, and compound assignment.</li>
+              <li><strong>Expressions</strong>: Combinations of variables, operators, and literals.</li>
+              <li><strong>Type Casting</strong>: Converting one data type to another.</li>
+              <li><strong>Constants</strong>: Declared with <code>final</code>.</li>
+              <li><strong>Operator Precedence</strong>: Order of operations.</li>
+              <li><strong>Escape Sequences</strong>: Special characters for formatting strings.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Example Code -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Example Code: Basic Primitive Types</h2>
+            <div class="code-block">
+              <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
+              <pre><code class="language-java">
+// Example: Primitive Types in Java
+public class PrimitiveTypesExample {
+  public static void main(String[] args) {
+    // Declare variables
+    int num1 = 10;
+    double num2 = 3.5;
+    boolean isJavaFun = true;
+    char grade = 'A';
+    final double PI = 3.14159; // Constant
+
+    // Perform arithmetic operations
+    int sum = num1 + (int) num2; // Type casting double to int
+    double product = num1 * num2;
+
+    // Output results
+    System.out.println("Sum: " + sum);
+    System.out.println("Product: " + product);
+    System.out.println("Is Java fun? " + isJavaFun);
+    System.out.println("Grade: " + grade);
+    System.out.println("PI: " + PI);
+  }
+}
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Code: Advanced Operations -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Example Code: Advanced Operations</h2>
+            <div class="code-block">
+              <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
+              <pre><code class="language-java">
+// Example: Advanced Operations with Primitive Types
+public class AdvancedOperations {
+    public static void main(String[] args) {
+        // Compound assignment operators
+        int x = 5;
+        x += 3; // x = x + 3
+        x *= 2; // x = x * 2
+        x %= 4; // x = x % 4
+        
+        // Type casting examples
+        double d = 3.14159;
+        int i = (int)d; // Explicit casting
+        long l = i; // Implicit casting
+        
+        // Operator precedence
+        int result = 2 + 3 * 4; // Multiplication first
+        int result2 = (2 + 3) * 4; // Parentheses first
+        
+        // Escape sequences
+        System.out.println("Line 1\nLine 2"); // New line
+        System.out.println("Tab\tSpacing"); // Tab
+        System.out.println("Quote: \"Hello\""); // Quote
+        System.out.println("Backslash: \\"); // Backslash
+        
+        // Print results
+        System.out.println("x = " + x);
+        System.out.println("i = " + i);
+        System.out.println("result = " + result);
+        System.out.println("result2 = " + result2);
+    }
+}
+              </code></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple Choice Practice -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Multiple Choice Practice</h2>
+            
+            <!-- Question 1 -->
+            <div class="question mb-4">
+              <h4>Question 1:</h4>
+              <p>Which of the following is NOT a primitive data type in Java?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. int</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">B. double</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">C. boolean</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">D. String</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. char</div>
+              </div>
+              <div class="explanation" id="explanation1">
+                <strong>Explanation:</strong> The answer is D. String is a class in Java, not a primitive data type. The primitive data types are: byte, short, int, long, float, double, boolean, and char.
+              </div>
+            </div>
+            
+            <!-- Question 2 -->
+            <div class="question mb-4">
+              <h4>Question 2:</h4>
+              <p>What is the result of the following expression?</p>
+              <pre><code class="language-java">
+int x = 5;
+double y = 2.0;
+int result = (int)(x * y);
+              </code></pre>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. 2</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">B. 2.5</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">C. 10</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">D. 10.0</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. Compilation error</div>
+              </div>
+              <div class="explanation" id="explanation2">
+                <strong>Explanation:</strong> The answer is C. First, x * y is calculated as 5 * 2.0 = 10.0. Then, the result is cast to an int, giving 10.
+              </div>
+            </div>
+            
+            <!-- Question 3 -->
+            <div class="question mb-4">
+              <h4>Question 3:</h4>
+              <p>Which operator has the highest precedence in Java?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. +</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">B. *</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">C. =</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">D. ()</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. %</div>
+              </div>
+              <div class="explanation" id="explanation3">
+                <strong>Explanation:</strong> The answer is D. Parentheses () have the highest precedence in Java and are used to explicitly control the order of operations.
+              </div>
+            </div>
+            
+            <!-- Question 4 -->
+            <div class="question mb-4">
+              <h4>Question 4:</h4>
+              <p>What is the value of x after the following code executes?</p>
+              <pre><code class="language-java">
+int x = 5;
+x += 3;
+x *= 2;
+              </code></pre>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. 5</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">B. 8</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">C. 16</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">D. 10</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. 13</div>
+              </div>
+              <div class="explanation" id="explanation4">
+                <strong>Explanation:</strong> The answer is C. First, x += 3 adds 3 to x, making it 8. Then, x *= 2 multiplies x by 2, making it 16.
+              </div>
+            </div>
+            
+            <!-- Question 5 -->
+            <div class="question mb-4">
+              <h4>Question 5:</h4>
+              <p>Which of the following is a valid way to declare a constant in Java?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="selectOption(this, 0)">A. const int MAX = 100;</div>
+                <div class="mc-option" onclick="selectOption(this, 1)">B. final int MAX = 100;</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">C. static int MAX = 100;</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">D. constant int MAX = 100;</div>
+                <div class="mc-option" onclick="selectOption(this, 0)">E. immutable int MAX = 100;</div>
+              </div>
+              <div class="explanation" id="explanation5">
+                <strong>Explanation:</strong> The answer is B. In Java, the keyword 'final' is used to declare constants. The value of a final variable cannot be changed after initialization.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Practice Problems -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Practice Problems</h2>
+            <ol>
+              <li>Write a program that calculates the area of a rectangle.</li>
+              <li>Convert a temperature from Fahrenheit to Celsius.</li>
+              <li>Swap the values of two variables without using a third variable.</li>
+              <li>Calculate the volume of a sphere using the formula V = (4/3)πr³.</li>
+              <li>Write a program that converts seconds into hours, minutes, and seconds.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Tips for Success -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Tips for Success</h2>
+            <ul>
+              <li>Practice coding regularly.</li>
+              <li>Use comments to explain your code.</li>
+              <li>Test your programs with different inputs.</li>
+              <li>Understand operator precedence to avoid common mistakes.</li>
+              <li>Be careful with type casting to avoid data loss.</li>
+              <li>Use meaningful variable names that describe their purpose.</li>
+              <li>Remember that integer division truncates decimal places.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="row mt-4 mb-5">
+          <div class="col-6">
+            <a href="unit10.html" class="btn btn-primary w-100">← Previous Unit: Recursion</a>
+          </div>
+          <div class="col-6">
+            <a href="unit2.html" class="btn btn-primary w-100">Next Unit: Using Objects →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center p-3">
+    <p class="mb-0">© 2024-2025 Hasan ASLAN, AP Computer Science A Course | 
+      <a href="https://github.com/itshasanaslan" target="_blank" class="text-white">GitHub</a>
+    </p>
+  </footer>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // Show loading indicator
+    window.addEventListener('load', function() {
+      document.getElementById('loadingIndicator').style.display = 'none';
+    });
+
+    // Function to toggle the sidebar
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const toggleBtn = document.getElementById('sidebarToggle');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      sidebar.classList.toggle('active');
+      toggleBtn.classList.toggle('active');
+      
+      // Change icon based on state
+      const icon = toggleBtn.querySelector('i');
+      if (sidebar.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+      
+      // Toggle overlay on mobile
+      if (window.innerWidth <= 768) {
+        overlay.classList.toggle('active');
+        
+        // Prevent body scrolling when sidebar is open
+        if (!sidebar.classList.contains('active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      }
+    }
+    
+    // Function to close sidebar
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const toggleBtn = document.getElementById('sidebarToggle');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      // Add active to sidebar to hide it (our CSS transitions sidebar out when active)
+      sidebar.classList.add('active');
+      toggleBtn.classList.remove('active');
+      
+      // Update icon
+      const icon = toggleBtn.querySelector('i');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+      
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close sidebar when window is resized beyond mobile breakpoint
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        const overlay = document.getElementById('sidebarOverlay');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Improved copy code functionality
+    function copyCode(button) {
+      const codeBlock = button.parentElement.querySelector('code');
+      const code = codeBlock.innerText;
+      
+      // Create tooltip
+      const tooltip = document.createElement('div');
+      tooltip.className = 'copy-tooltip';
+      tooltip.textContent = 'Copied!';
+      button.appendChild(tooltip);
+      
+      navigator.clipboard.writeText(code).then(() => {
+        tooltip.classList.add('show');
+        setTimeout(() => {
+          tooltip.classList.remove('show');
+          setTimeout(() => tooltip.remove(), 300);
+        }, 2000);
+      }).catch(err => {
+        tooltip.textContent = 'Failed to copy';
+        tooltip.classList.add('show');
+        setTimeout(() => {
+          tooltip.classList.remove('show');
+          setTimeout(() => tooltip.remove(), 300);
+        }, 2000);
+      });
+    }
+
+    // Function to handle multiple choice selection
+    function selectOption(option, isCorrect) {
+      // Remove any previous selections
+      const options = option.parentElement.querySelectorAll('.mc-option');
+      options.forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'incorrect');
+      });
+      
+      // Mark the selected option
+      option.classList.add('selected');
+      
+      if (isCorrect) {
+        option.classList.add('correct');
+      } else {
+        option.classList.add('incorrect');
+      }
+      
+      // Show the explanation
+      const questionDiv = option.closest('.question');
+      const explanation = questionDiv.querySelector('.explanation');
+      explanation.style.display = 'block';
+    }
+
+    // Function to highlight the active link in the sidebar
+    function highlightActiveLink() {
+      const currentPage = window.location.pathname.split("/").pop() || 'index.html';
+      const links = document.querySelectorAll('.sidebar .nav-link');
+
+      links.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage || 
+            (currentPage === 'index.html' && href === 'unit1.html')) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Call the function when the page loads
+    highlightActiveLink();
+
+    // Progress tracking
+    function updateProgress() {
+      const completedUnits = localStorage.getItem('completedUnits') || '[]';
+      const completed = JSON.parse(completedUnits);
+      const totalUnits = document.querySelectorAll('#unitList .nav-link').length;
+      const progress = (completed.length / totalUnits) * 100;
+      
+      document.getElementById('progressBar').style.width = `${progress}%`;
+      document.getElementById('progressText').textContent = `${Math.round(progress)}%`;
+      
+      // Update completed units styling
+      document.querySelectorAll('#unitList .nav-link').forEach(link => {
+        const unitNumber = link.getAttribute('href').replace('unit', '').replace('.html', '');
+        if (completed.includes(unitNumber)) {
+          link.classList.add('completed');
+          // Only add the icon if it doesn't already exist
+          if (!link.innerHTML.includes('fa-check-circle')) {
+            link.innerHTML += ' <i class="fas fa-check-circle text-success"></i>';
+          }
+        }
+      });
+    }
+
+    // Mark current unit as completed
+    function markUnitAsCompleted() {
+      const currentUnit = window.location.pathname.split('/').pop().replace('unit', '').replace('.html', '');
+      if (!currentUnit || currentUnit === 'index.html') return;
+      
+      const completedUnits = JSON.parse(localStorage.getItem('completedUnits') || '[]');
+      
+      if (!completedUnits.includes(currentUnit)) {
+        completedUnits.push(currentUnit);
+        localStorage.setItem('completedUnits', JSON.stringify(completedUnits));
+        updateProgress();
+      }
+    }
+
+    // Handle touch events better on mobile
+    document.addEventListener('touchstart', function() {}, {passive: true});
+
+    // Initialize progress
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      markUnitAsCompleted();
+      
+      // Add event listeners
+      document.getElementById('sidebarToggle').addEventListener('click', toggleSidebar);
+      document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
+      
+      // Auto-close sidebar on link click for mobile
+      if (window.innerWidth <= 768) {
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+          link.addEventListener('click', function() {
+            closeSidebar();
+          });
+        });
+      }
+    });
+  </script>
+  
+  <!-- Dynamic paths for GitHub Pages -->
+  <script src="dynamic-paths.js"></script>
+</body>
+</html>
