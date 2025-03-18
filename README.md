@@ -35,7 +35,7 @@ This cheatsheet covers all 10 units in the AP Computer Science A curriculum:
 
 ### Online Access
 
-Visit [https://yourusername.github.io/repository-name/](https://yourusername.github.io/repository-name/) to access the cheatsheet online.
+Visit [https://itshasanaslan.github.io/AP-CS-A-CheatSheet/](https://itshasanaslan.github.io/AP-CS-A-CheatSheet/) to access the cheatsheet online.
 
 ### Local Setup
 
@@ -43,7 +43,7 @@ To run this cheatsheet locally:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/repository-name.git
+   git clone https://github.com/itshasanaslan/AP-CS-A-CheatSheet.git
    ```
 
 2. Open `index.html` in your web browser.
@@ -93,7 +93,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - All contributors who helped improve this cheatsheet
 
 ---
-
-Created with ❤️ for AP Computer Science A students.
-
-*Note: Replace "yourusername" and "repository-name" with your actual GitHub username and repository name.* 
