@@ -85,11 +85,5 @@ Contributions are welcome! If you'd like to contribute:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgements
-
-- AP Computer Science A curriculum by College Board
-- Bootstrap for responsive design components
-- Prism.js for code syntax highlighting
-- All contributors who helped improve this cheatsheet
 
 ---
