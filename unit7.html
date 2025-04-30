@@ -263,6 +263,27 @@ class Student implements Comparable<Student> {
           </div>
         </div>
 
+        <!-- Interactive Code Playground -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Interactive Code Playground</h2>
+            <p>Try out your own ArrayList code here! The code will run in a safe environment.</p>
+            <div class="code-editor mb-3">
+              <textarea id="codeInput" class="form-control" rows="10" placeholder="// Write your ArrayList code here
+// Example:
+ArrayList<String> fruits = new ArrayList<>();
+fruits.add(&quot;Apple&quot;);
+fruits.add(&quot;Banana&quot;);
+System.out.println(fruits);"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+            <div class="output-container mt-3">
+              <h5>Output:</h5>
+              <pre id="codeOutput" class="bg-dark text-white p-3 rounded" style="min-height: 100px;"></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- Practice Problems -->
         <div class="card mb-4 animate__animated animate__fadeInLeft">
           <div class="card-body">
@@ -288,6 +309,127 @@ class Student implements Comparable<Student> {
             </ul>
           </div>
         </div>
+
+        <!-- Multiple Choice Quiz -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Test Your Knowledge</h2>
+            <div class="quiz-container">
+              <div class="quiz-question mb-4">
+                <h5>1. What is the correct way to create an ArrayList of integers?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">ArrayList<int> numbers = new ArrayList<>();</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">ArrayList<Integer> numbers = new ArrayList<>();</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">ArrayList numbers = new ArrayList();</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">ArrayList numbers = new ArrayList<Integer>();</div>
+                </div>
+                <div class="explanation">The correct answer is B. ArrayList<Integer> numbers = new ArrayList<>();. ArrayLists can only store objects, so we must use the wrapper class Integer instead of the primitive type int.</div>
+              </div>
+
+              <div class="quiz-question mb-4">
+                <h5>2. What happens when you try to add an element to an ArrayList that is already at its capacity?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">The ArrayList throws an IndexOutOfBoundsException</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">The ArrayList automatically resizes itself</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">The ArrayList deletes the last element</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">The ArrayList becomes read-only</div>
+                </div>
+                <div class="explanation">The correct answer is B. The ArrayList automatically resizes itself. ArrayLists are dynamic and will automatically increase their capacity when needed.</div>
+              </div>
+
+              <div class="quiz-question mb-4">
+                <h5>3. What is the difference between ArrayList.remove(index) and ArrayList.remove(Object)?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">remove(index) removes by position, remove(Object) removes by value</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">remove(index) is faster than remove(Object)</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">remove(index) returns void, remove(Object) returns boolean</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">There is no difference</div>
+                </div>
+                <div class="explanation">The correct answer is A. remove(index) removes the element at the specified position, while remove(Object) removes the first occurrence of the specified element from the ArrayList.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparable Interface -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">The Comparable Interface</h2>
+            <p>The <code>Comparable</code> interface is used to define a natural ordering for objects. It's particularly useful when you need to sort objects in a collection.</p>
+            
+            <h4>Key Points:</h4>
+            <ul>
+              <li>The <code>Comparable</code> interface is part of the <code>java.lang</code> package</li>
+              <li>It requires implementing the <code>compareTo</code> method</li>
+              <li>The <code>compareTo</code> method returns:
+                <ul>
+                  <li>A negative integer if the current object is less than the argument</li>
+                  <li>Zero if the current object is equal to the argument</li>
+                  <li>A positive integer if the current object is greater than the argument</li>
+                </ul>
+              </li>
+              <li>It's used by <code>Collections.sort()</code> to sort objects</li>
+            </ul>
+
+            <h4>Example: Student Class with Multiple Comparison Strategies</h4>
+            <div class="code-block">
+              <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
+              <pre><code class="language-java">
+// Student class implementing Comparable
+public class Student implements Comparable<Student> {
+    private String name;
+    private int grade;
+    private double gpa;
+    
+    public Student(String name, int grade, double gpa) {
+        this.name = name;
+        this.grade = grade;
+        this.gpa = gpa;
+    }
+    
+    // Natural ordering by grade
+    @Override
+    public int compareTo(Student other) {
+        return Integer.compare(this.grade, other.grade);
+    }
+    
+    // Alternative comparison by GPA
+    public int compareByGPA(Student other) {
+        return Double.compare(this.gpa, other.gpa);
+    }
+    
+    // Alternative comparison by name
+    public int compareByName(Student other) {
+        return this.name.compareTo(other.name);
+    }
+    
+    @Override
+    public String toString() {
+        return name + " (Grade: " + grade + ", GPA: " + gpa + ")";
+    }
+}
+              </code></pre>
+            </div>
+
+            <h4>Practice Problems:</h4>
+            <ol>
+              <li>Create a <code>Book</code> class that implements <code>Comparable</code> to sort books by title.</li>
+              <li>Modify the <code>Student</code> class to sort by GPA when grades are equal.</li>
+              <li>Create a <code>Rectangle</code> class that implements <code>Comparable</code> to sort by area.</li>
+              <li>Implement a <code>Date</code> class that can be sorted chronologically.</li>
+              <li>Create a <code>Person</code> class that can be sorted by age, then by name if ages are equal.</li>
+            </ol>
+
+            <h4>Tips for Success:</h4>
+            <ul>
+              <li>Always implement <code>compareTo</code> consistently with <code>equals</code></li>
+              <li>Use the appropriate wrapper class's <code>compare</code> method for primitive types</li>
+              <li>Consider multiple fields when implementing natural ordering</li>
+              <li>Remember that <code>compareTo</code> should throw <code>NullPointerException</code> if the argument is null</li>
+              <li>Use <code>Comparator</code> when you need multiple sorting strategies</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -309,7 +451,7 @@ class Student implements Comparable<Student> {
   <script>
     // Show loading indicator
     window.addEventListener('load', function() {
-      document.getElementById('loadingIndicator').style.display = 'none';
+      document.getElementById('loading').style.display = 'none';
     });
 
     // Function to toggle the sidebar
@@ -397,6 +539,75 @@ class Student implements Comparable<Student> {
       updateProgress();
       markUnitAsCompleted();
     });
+
+    // Code playground functionality
+    function runCode() {
+      const codeInput = document.getElementById('codeInput').value;
+      const codeOutput = document.getElementById('codeOutput');
+      
+      try {
+        // Create a safe environment for code execution
+        const safeCode = `
+          try {
+            ${codeInput}
+          } catch (e) {
+            console.error(e);
+          }
+        `;
+        
+        // Create a new script element
+        const script = document.createElement('script');
+        script.textContent = safeCode;
+        
+        // Clear previous output
+        codeOutput.textContent = '';
+        
+        // Override console.log to capture output
+        const originalConsoleLog = console.log;
+        console.log = function(...args) {
+          codeOutput.textContent += args.join(' ') + '\\n';
+          originalConsoleLog.apply(console, args);
+        };
+        
+        // Execute the code
+        document.body.appendChild(script);
+        document.body.removeChild(script);
+        
+        // Restore original console.log
+        console.log = originalConsoleLog;
+      } catch (error) {
+        codeOutput.textContent = 'Error: ' + error.message;
+      }
+    }
+
+    // Quiz functionality
+    function checkAnswer(element, correctAnswer) {
+      const options = element.parentElement.querySelectorAll('.mc-option');
+      const explanation = element.parentElement.nextElementSibling;
+      
+      // Remove previous selections
+      options.forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'incorrect');
+      });
+      
+      // Mark selected option
+      element.classList.add('selected');
+      
+      // Check if correct
+      if (element.getAttribute('onclick').includes(correctAnswer)) {
+        element.classList.add('correct');
+        explanation.style.display = 'block';
+      } else {
+        element.classList.add('incorrect');
+        // Find and mark correct answer
+        options.forEach(opt => {
+          if (opt.getAttribute('onclick').includes(correctAnswer)) {
+            opt.classList.add('correct');
+          }
+        });
+        explanation.style.display = 'block';
+      }
+    }
   </script>
   
   <!-- Dynamic paths for GitHub Pages -->

@@ -150,67 +150,52 @@
         <!-- Example Code -->
         <div class="card mb-4 animate__animated animate__fadeInRight">
           <div class="card-body">
-            <h2 class="card-title">Example Code: Basic Inheritance</h2>
+            <h2 class="card-title">Example Code</h2>
             <div class="code-block">
               <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
               <pre><code class="language-java">
-// Example: Basic Inheritance in Java
-// Parent class (Superclass)
-public class Vehicle {
-    private String brand;
-    private int year;
+// Example: Inheritance in Java
+class Animal {
+    protected String name;
     
-    public Vehicle(String brand, int year) {
-        this.brand = brand;
-        this.year = year;
+    public Animal(String name) {
+        this.name = name;
     }
     
-    public void displayInfo() {
-        System.out.println("Brand: " + brand);
-        System.out.println("Year: " + year);
-    }
-    
-    public String getBrand() {
-        return brand;
-    }
-    
-    public int getYear() {
-        return year;
+    public void makeSound() {
+        System.out.println("Some sound");
     }
 }
 
-// Child class (Subclass)
-public class Car extends Vehicle {
-    private int numDoors;
-    
-    public Car(String brand, int year, int numDoors) {
-        super(brand, year); // Call the superclass constructor
-        this.numDoors = numDoors;
+class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
     }
     
-    // Override the displayInfo method
     @Override
-    public void displayInfo() {
-        super.displayInfo(); // Call the superclass method
-        System.out.println("Number of doors: " + numDoors);
-    }
-    
-    public void honk() {
-        System.out.println(getBrand() + " car honks!");
+    public void makeSound() {
+        System.out.println("Woof!");
     }
 }
 
-// Main class to test inheritance
-public class InheritanceDemo {
+class Cat extends Animal {
+    public Cat(String name) {
+        super(name);
+    }
+    
+    @Override
+    public void makeSound() {
+        System.out.println("Meow!");
+    }
+}
+
+public class InheritanceExample {
     public static void main(String[] args) {
-        Car myCar = new Car("Toyota", 2022, 4);
-        myCar.displayInfo(); // Calls the overridden method in Car
-        myCar.honk();
+        Animal dog = new Dog("Buddy");
+        Animal cat = new Cat("Whiskers");
         
-        // Polymorphism: A Vehicle reference can refer to a Car object
-        Vehicle vehicle = new Car("Honda", 2021, 2);
-        vehicle.displayInfo(); // Calls the overridden method in Car
-        // vehicle.honk(); // This would cause an error
+        dog.makeSound();
+        cat.makeSound();
     }
 }
               </code></pre>
@@ -218,225 +203,99 @@ public class InheritanceDemo {
           </div>
         </div>
 
-        <!-- Example Code: Abstract Classes and Interfaces -->
+        <!-- Interactive Code Playground -->
         <div class="card mb-4 animate__animated animate__fadeInLeft">
           <div class="card-body">
-            <h2 class="card-title">Example Code: Abstract Classes and Interfaces</h2>
-            <div class="code-block">
-              <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
-              <pre><code class="language-java">
-// Example: Abstract Classes and Interfaces in Java
-// Abstract class
-public abstract class Shape {
-    private String color;
+            <h2 class="card-title">Interactive Code Playground</h2>
+            <p>Try out your own inheritance code here!</p>
+            <div class="code-editor mb-3">
+              <textarea id="codeInput" class="form-control" rows="10" placeholder="// Write your inheritance code here
+// Example:
+class Vehicle {
+    protected String brand;
     
-    public Shape(String color) {
-        this.color = color;
+    public Vehicle(String brand) {
+        this.brand = brand;
     }
     
-    // Abstract method (no implementation)
-    public abstract double calculateArea();
-    
-    // Concrete method (with implementation)
-    public void displayColor() {
-        System.out.println("Color: " + color);
-    }
-    
-    public String getColor() {
-        return color;
+    public void start() {
+        System.out.println("Vehicle starting...");
     }
 }
 
-// Interface
-public interface Drawable {
-    void draw(); // Abstract method by default
-    
-    // Default method (Java 8+)
-    default void displayDrawingInfo() {
-        System.out.println("Drawing a shape");
-    }
-}
-
-// Concrete subclass that extends an abstract class and implements an interface
-public class Circle extends Shape implements Drawable {
-    private double radius;
-    
-    public Circle(String color, double radius) {
-        super(color);
-        this.radius = radius;
+class Car extends Vehicle {
+    public Car(String brand) {
+        super(brand);
     }
     
-    // Implement the abstract method from Shape
     @Override
-    public double calculateArea() {
-        return Math.PI * radius * radius;
-    }
-    
-    // Implement the method from Drawable
-    @Override
-    public void draw() {
-        System.out.println("Drawing a " + getColor() + " circle with radius " + radius);
-    }
-}
-
-// Main class to test abstract classes and interfaces
-public class AbstractDemo {
-    public static void main(String[] args) {
-        Circle circle = new Circle("Red", 5.0);
-        circle.displayColor(); // Inherited from Shape
-        System.out.println("Area: " + circle.calculateArea()); // Implemented from Shape
-        circle.draw(); // Implemented from Drawable
-        circle.displayDrawingInfo(); // Inherited from Drawable
-        
-        // Polymorphism with abstract class
-        Shape shape = new Circle("Blue", 3.0);
-        System.out.println("Area: " + shape.calculateArea());
-        
-        // Polymorphism with interface
-        Drawable drawable = new Circle("Green", 4.0);
-        drawable.draw();
-    }
-}
-              </code></pre>
-            </div>
-          </div>
-        </div>
-
-        <!-- Multiple Choice Practice -->
-        <div class="card mb-4 animate__animated animate__fadeInRight">
-          <div class="card-body">
-            <h2 class="card-title">Multiple Choice Practice</h2>
-            
-            <!-- Question 1 -->
-            <div class="question mb-4">
-              <h4>Question 1:</h4>
-              <p>Consider the following code:</p>
-              <pre><code class="language-java">
-public class Animal {
-    public void makeSound() {
-        System.out.println("Animal makes a sound");
-    }
-}
-
-public class Dog extends Animal {
-    public void makeSound() {
-        System.out.println("Dog barks");
+    public void start() {
+        System.out.println("Car starting...");
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Animal a = new Dog();
-        a.makeSound();
+        Vehicle car = new Car("Toyota");
+        car.start();
     }
-}
-              </code></pre>
-              <p>What will be printed when the Main class is executed?</p>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. Animal makes a sound</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">B. Dog barks</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. Both "Animal makes a sound" and "Dog barks"</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. Nothing will be printed</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. A compilation error will occur</div>
-              </div>
-              <div class="explanation" id="explanation1">
-                <strong>Explanation:</strong> The answer is B. This is an example of polymorphism. Although the reference type is Animal, the object type is Dog. When the makeSound() method is called, Java uses the object's type to determine which method to call, so the Dog's makeSound() method is executed.
-              </div>
+}"></textarea>
             </div>
-            
-            <!-- Question 2 -->
-            <div class="question mb-4">
-              <h4>Question 2:</h4>
-              <p>Which keyword is used to inherit from a class in Java?</p>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. implements</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">B. extends</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. inherits</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. super</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. this</div>
-              </div>
-              <div class="explanation" id="explanation2">
-                <strong>Explanation:</strong> The answer is B. In Java, the extends keyword is used to establish inheritance between classes. For example: public class Dog extends Animal {}.
-              </div>
+            <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+            <div class="output-container mt-3">
+              <h5>Output:</h5>
+              <pre id="codeOutput" class="bg-dark text-white p-3 rounded" style="min-height: 100px;">Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.</pre>
             </div>
-            
-            <!-- Question 3 -->
-            <div class="question mb-4">
-              <h4>Question 3:</h4>
-              <p>What is the output of the following code?</p>
-              <pre><code class="language-java">
-public class Parent {
-    public Parent() {
-        System.out.println("Parent Constructor");
-    }
-}
+            <div class="mt-3">
+              <p class="text-muted">For actual code execution, we recommend using:</p>
+              <ul>
+                <li><a href="https://replit.com/languages/java" target="_blank">Replit Java</a></li>
+                <li><a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a></li>
+                <li><a href="https://www.onlinegdb.com/online_java_compiler" target="_blank">OnlineGDB</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-public class Child extends Parent {
-    public Child() {
-        System.out.println("Child Constructor");
-    }
-    
-    public static void main(String[] args) {
-        Child c = new Child();
-    }
-}
-              </code></pre>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. Child Constructor</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. Parent Constructor</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">C. Parent Constructor followed by Child Constructor</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. Child Constructor followed by Parent Constructor</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. Compilation error</div>
-              </div>
-              <div class="explanation" id="explanation3">
-                <strong>Explanation:</strong> The answer is C. When a subclass object is created, the constructor of the superclass is called first, followed by the constructor of the subclass. This is why "Parent Constructor" is printed first, followed by "Child Constructor".
-              </div>
-            </div>
+        <!-- Multiple Choice Quiz -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Multiple Choice Quiz</h2>
             
-            <!-- Question 4 -->
-            <div class="question mb-4">
-              <h4>Question 4:</h4>
-              <p>Which of the following is true about an abstract class in Java?</p>
+            <div class="practice-problem mb-4">
+              <h5>Question 1: Inheritance Basics</h5>
+              <p>Which keyword is used to establish inheritance between classes in Java?</p>
               <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. It can be instantiated directly</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. It cannot contain any concrete methods</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. It must implement all methods of the interfaces it implements</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">D. It can have abstract methods that subclasses must implement</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. It cannot be extended by other classes</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">extends</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">implements</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">inherits</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">derives</div>
               </div>
-              <div class="explanation" id="explanation4">
-                <strong>Explanation:</strong> The answer is D. An abstract class can have abstract methods (methods without implementation) that must be implemented by any concrete (non-abstract) subclass. Abstract classes cannot be instantiated directly.
-              </div>
+              <div class="explanation">The correct answer is A. The 'extends' keyword is used to create a subclass that inherits from a superclass in Java.</div>
             </div>
-            
-            <!-- Question 5 -->
-            <div class="question mb-4">
-              <h4>Question 5:</h4>
-              <p>Consider the following code:</p>
-              <pre><code class="language-java">
-public interface Drawable {
-    void draw();
-}
 
-public interface Colorable {
-    void setColor(String color);
-}
-
-public class Picture implements Drawable, Colorable {
-    // Implementation details omitted
-}
-              </code></pre>
-              <p>Which statement about the Picture class is correct?</p>
+            <div class="practice-problem mb-4">
+              <h5>Question 2: Method Overriding</h5>
+              <p>What is the purpose of the @Override annotation in Java?</p>
               <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. Picture can only implement one interface at a time</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">B. Picture must provide implementations for both draw() and setColor() methods</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. Picture cannot extend any other class</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. Picture can choose to implement either draw() or setColor(), but not both</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. Picture automatically inherits implementations for these methods</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">To indicate that a method is being overridden from a superclass</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">To create a new method in the subclass</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">To prevent a method from being overridden</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">To make a method private</div>
               </div>
-              <div class="explanation" id="explanation5">
-                <strong>Explanation:</strong> The answer is B. When a class implements interfaces, it must provide implementations for all the abstract methods declared in those interfaces. In this case, Picture must implement both the draw() method from Drawable and the setColor() method from Colorable.
+              <div class="explanation">The correct answer is A. The @Override annotation indicates that a method is intended to override a method in a superclass, helping catch errors if the method signature doesn't match.</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Question 3: Super Keyword</h5>
+              <p>What is the purpose of the super keyword in Java?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">To call the superclass constructor or methods</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">To create a new superclass object</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">To make a class a superclass</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">To prevent inheritance</div>
               </div>
+              <div class="explanation">The correct answer is A. The super keyword is used to call the superclass constructor or methods from within a subclass.</div>
             </div>
           </div>
         </div>
@@ -574,6 +433,16 @@ public class Picture implements Drawable, Colorable {
 
     // Call the function when the page loads
     highlightActiveLink();
+
+    // Code playground functionality
+    function runCode() {
+      const codeInput = document.getElementById('codeInput').value;
+      const codeOutput = document.getElementById('codeOutput');
+      
+      // Show a message about using an actual Java compiler
+      codeOutput.textContent = "Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.\n\n";
+      codeOutput.textContent += "Your code:\n" + codeInput;
+    }
   </script>
   
   <!-- Dynamic paths for GitHub Pages -->

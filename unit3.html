@@ -246,6 +246,238 @@ public class AdvancedBooleanExample {
           </div>
         </div>
 
+        <!-- Boolean Expressions and Logical Operators -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Boolean Expressions and Logical Operators</h2>
+            
+            <h4>Common Boolean Operators:</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>&&</code></td>
+                    <td>Logical AND</td>
+                    <td><code>true && false</code> → false</td>
+                  </tr>
+                  <tr>
+                    <td><code>||</code></td>
+                    <td>Logical OR</td>
+                    <td><code>true || false</code> → true</td>
+                  </tr>
+                  <tr>
+                    <td><code>!</code></td>
+                    <td>Logical NOT</td>
+                    <td><code>!true</code> → false</td>
+                  </tr>
+                  <tr>
+                    <td><code>==</code></td>
+                    <td>Equality</td>
+                    <td><code>5 == 5</code> → true</td>
+                  </tr>
+                  <tr>
+                    <td><code>!=</code></td>
+                    <td>Not equal</td>
+                    <td><code>5 != 3</code> → true</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4>Boolean Expression Examples:</h4>
+            <div class="code-block">
+              <pre><code class="language-java">
+// Basic boolean expressions
+boolean isAdult = age >= 18;
+boolean isTeenager = age >= 13 && age <= 19;
+boolean isChild = age < 13;
+
+// Complex boolean expressions
+boolean canVote = age >= 18 && isCitizen;
+boolean canDrive = age >= 16 || hasSpecialPermit;
+boolean isWeekend = day == "Saturday" || day == "Sunday";
+
+// Using NOT operator
+boolean isNotAdult = !isAdult;
+boolean isNotWeekend = !isWeekend;
+              </code></pre>
+            </div>
+
+            <h4>Short-Circuit Evaluation:</h4>
+            <div class="code-block">
+              <pre><code class="language-java">
+// && short-circuits if first condition is false
+if (x != 0 && y / x > 2) {
+    // Safe division because x != 0 is checked first
+}
+
+// || short-circuits if first condition is true
+if (name == null || name.length() == 0) {
+    // Safe length check because null is checked first
+}
+              </code></pre>
+            </div>
+
+            <h4>Boolean Expression Tips:</h4>
+            <ul>
+              <li>Use parentheses to clarify complex expressions</li>
+              <li>Take advantage of short-circuit evaluation</li>
+              <li>Use meaningful variable names for boolean values</li>
+              <li>Consider De Morgan's Laws for simplifying expressions</li>
+              <li>Be careful with floating-point comparisons</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Common Pitfalls and Debugging Tips -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Common Pitfalls and Debugging Tips</h2>
+            
+            <h4>Common Mistakes:</h4>
+            <ul>
+              <li><strong>Assignment vs. Comparison</strong>: Using = instead of ==
+                <div class="code-block">
+                  <pre><code class="language-java">
+if (x = 5) {  // Wrong! Assigns 5 to x
+if (x == 5) { // Correct! Compares x with 5
+                  </code></pre>
+                </div>
+              </li>
+              <li><strong>Floating-Point Comparison</strong>: Using == with doubles
+                <div class="code-block">
+                  <pre><code class="language-java">
+double x = 0.1 + 0.2;
+if (x == 0.3) {  // Wrong! Might be false due to precision
+if (Math.abs(x - 0.3) < 0.0001) {  // Correct! Uses tolerance
+                  </code></pre>
+                </div>
+              </li>
+              <li><strong>String Comparison</strong>: Using == instead of equals()
+                <div class="code-block">
+                  <pre><code class="language-java">
+String s1 = "Hello";
+String s2 = new String("Hello");
+if (s1 == s2) {  // Wrong! Compares references
+if (s1.equals(s2)) {  // Correct! Compares content
+                  </code></pre>
+                </div>
+              </li>
+            </ul>
+
+            <h4>Debugging Tips:</h4>
+            <ul>
+              <li>Use System.out.println() to print boolean values</li>
+              <li>Break complex expressions into smaller parts</li>
+              <li>Use parentheses to clarify operator precedence</li>
+              <li>Test edge cases (null, zero, empty strings)</li>
+              <li>Use truth tables to verify complex logic</li>
+            </ul>
+
+            <h4>AP Exam Tips:</h4>
+            <ul>
+              <li>Know operator precedence rules</li>
+              <li>Understand short-circuit evaluation</li>
+              <li>Be able to evaluate complex boolean expressions</li>
+              <li>Know when to use equals() vs ==</li>
+              <li>Understand De Morgan's Laws</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- AP Exam-Style Practice Problems -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">AP Exam-Style Practice Problems</h2>
+            
+            <div class="practice-problem mb-4">
+              <h5>Problem 1: Boolean Expression Evaluation</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+int x = 5;
+int y = 10;
+boolean result = (x > 3) && (y < 15) || (x + y == 20);
+System.out.println(result);
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">true</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">false</div>
+              </div>
+              <div class="explanation">The correct answer is A. The expression evaluates to true because (x > 3) is true and (y < 15) is true, making the entire expression true.</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 2: Short-Circuit Evaluation</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+int x = 0;
+boolean result = (x != 0) && (10 / x > 2);
+System.out.println(result);
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">true</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">false</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">ArithmeticException</div>
+              </div>
+              <div class="explanation">The correct answer is B. Due to short-circuit evaluation, the second part of the expression is not evaluated because x != 0 is false.</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 3: String Comparison</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+String s1 = "Hello";
+String s2 = new String("Hello");
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">false true</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">true true</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">false false</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">true false</div>
+              </div>
+              <div class="explanation">The correct answer is A. s1 and s2 are different objects (false), but they have the same content (true).</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 4: Complex Boolean Expression</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+int age = 16;
+boolean hasLicense = true;
+boolean hasParent = false;
+boolean canDrive = (age >= 16 && hasLicense) || (age >= 15 && hasParent);
+System.out.println(canDrive);
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">true</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">false</div>
+              </div>
+              <div class="explanation">The correct answer is A. The expression evaluates to true because age >= 16 is true and hasLicense is true.</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Multiple Choice Practice -->
         <div class="card mb-4 animate__animated animate__fadeInRight">
           <div class="card-body">
@@ -378,6 +610,87 @@ System.out.println(a && b || c);
               <li>Use meaningful variable names for boolean values (e.g., isPassing, hasPermission).</li>
               <li>Remember that && has higher precedence than ||.</li>
             </ul>
+          </div>
+        </div>
+
+        <!-- Interactive Code Playground -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Interactive Code Playground</h2>
+            <p>Try out your own boolean expressions and conditional statements here!</p>
+            <div class="code-editor mb-3">
+              <textarea id="codeInput" class="form-control" rows="10" placeholder="// Write your boolean expressions and conditional statements here
+// Example:
+int age = 18;
+boolean isAdult = age >= 18;
+System.out.println(&quot;Is adult? &quot; + isAdult);
+
+// Conditional statements
+if (age >= 18) {
+    System.out.println(&quot;You are an adult&quot;);
+} else {
+    System.out.println(&quot;You are a minor&quot;);
+}
+
+// Logical operators
+boolean hasLicense = true;
+boolean canDrive = isAdult && hasLicense;
+System.out.println(&quot;Can drive? &quot; + canDrive);"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+            <div class="output-container mt-3">
+              <h5>Output:</h5>
+              <pre id="codeOutput" class="bg-dark text-white p-3 rounded" style="min-height: 100px;">Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.</pre>
+            </div>
+            <div class="mt-3">
+              <p class="text-muted">For actual code execution, we recommend using:</p>
+              <ul>
+                <li><a href="https://replit.com/languages/java" target="_blank">Replit Java</a></li>
+                <li><a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a></li>
+                <li><a href="https://www.onlinegdb.com/online_java_compiler" target="_blank">OnlineGDB</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple Choice Quiz -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Test Your Knowledge</h2>
+            <div class="quiz-container">
+              <div class="quiz-question mb-4">
+                <h5>1. What is the result of the expression: !(true && false) || true?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">true</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">false</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">Compilation error</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">Runtime error</div>
+                </div>
+                <div class="explanation">The correct answer is A. true. The expression evaluates as follows: !(true && false) || true → !(false) || true → true || true → true.</div>
+              </div>
+
+              <div class="quiz-question mb-4">
+                <h5>2. Which of the following is NOT a valid boolean expression?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">x > 5 && y < 10</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">x = 5 || y = 10</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">!(x == y)</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">x >= 0 && x <= 100</div>
+                </div>
+                <div class="explanation">The correct answer is B. x = 5 || y = 10. This is not valid because = is the assignment operator, not a comparison operator. The correct comparison operators are ==, !=, >, <, >=, <=.</div>
+              </div>
+
+              <div class="quiz-question mb-4">
+                <h5>3. What is the result of the expression: (5 > 3) ? "Yes" : "No"?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">"Yes"</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">"No"</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">true</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">false</div>
+                </div>
+                <div class="explanation">The correct answer is A. "Yes". This is a ternary operator expression. Since 5 > 3 is true, it returns the first value "Yes".</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -514,6 +827,45 @@ System.out.println(a && b || c);
       updateProgress();
       markUnitAsCompleted();
     });
+
+    // Code playground functionality
+    function runCode() {
+      const codeInput = document.getElementById('codeInput').value;
+      const codeOutput = document.getElementById('codeOutput');
+      
+      // Show a message about using an actual Java compiler
+      codeOutput.textContent = "Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.\n\n";
+      codeOutput.textContent += "Your code:\n" + codeInput;
+    }
+
+    // Quiz functionality
+    function checkAnswer(element, correctAnswer) {
+      const options = element.parentElement.querySelectorAll('.mc-option');
+      const explanation = element.parentElement.nextElementSibling;
+      
+      // Remove previous selections
+      options.forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'incorrect');
+      });
+      
+      // Mark selected option
+      element.classList.add('selected');
+      
+      // Check if correct
+      if (element.getAttribute('onclick').includes(correctAnswer)) {
+        element.classList.add('correct');
+        explanation.style.display = 'block';
+      } else {
+        element.classList.add('incorrect');
+        // Find and mark correct answer
+        options.forEach(opt => {
+          if (opt.getAttribute('onclick').includes(correctAnswer)) {
+            opt.classList.add('correct');
+          }
+        });
+        explanation.style.display = 'block';
+      }
+    }
   </script>
   
   <!-- Dynamic paths for GitHub Pages -->

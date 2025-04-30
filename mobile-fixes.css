@@ -1,0 +1,56 @@
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+    /* Fix hamburger menu alignment */
+    .navbar-toggler {
+        margin-right: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    /* Adjust navbar padding for mobile */
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    /* Ensure navbar brand is properly aligned */
+    .navbar-brand {
+        margin-right: 0;
+    }
+
+    /* Fix code block overflow on mobile */
+    .code-block pre {
+        overflow-x: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    /* Adjust card margins for better mobile spacing */
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    /* Make code editor more mobile-friendly */
+    .code-editor textarea {
+        font-size: 14px;
+        padding: 0.5rem;
+    }
+
+    /* Adjust quiz options for better touch targets */
+    .mc-option {
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Fix table responsiveness */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* Adjust font sizes for better readability on mobile */
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.1rem; }
+    h5 { font-size: 1rem; }
+} 

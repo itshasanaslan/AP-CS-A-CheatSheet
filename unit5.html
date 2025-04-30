@@ -254,6 +254,289 @@ public class StudentTest {
           </div>
         </div>
 
+        <!-- Writing Classes -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Writing Classes</h2>
+            
+            <h4>Class Components:</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Instance Variables</td>
+                    <td>Data fields of a class</td>
+                    <td><code>private String name;</code></td>
+                  </tr>
+                  <tr>
+                    <td>Constructor</td>
+                    <td>Initializes objects</td>
+                    <td><code>public Student(String n) { name = n; }</code></td>
+                  </tr>
+                  <tr>
+                    <td>Methods</td>
+                    <td>Behaviors of a class</td>
+                    <td><code>public String getName() { return name; }</code></td>
+                  </tr>
+                  <tr>
+                    <td>Access Modifiers</td>
+                    <td>Control visibility</td>
+                    <td><code>public, private, protected</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4>Class Example:</h4>
+            <div class="code-block">
+              <pre><code class="language-java">
+public class Student {
+    // Instance variables
+    private String name;
+    private int grade;
+    private double gpa;
+
+    // Constructor
+    public Student(String n, int g, double gpa) {
+        name = n;
+        grade = g;
+        this.gpa = gpa;
+    }
+
+    // Methods
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int g) {
+        grade = g;
+    }
+
+    public double getGPA() {
+        return gpa;
+    }
+
+    public void setGPA(double gpa) {
+        this.gpa = gpa;
+    }
+
+    public String toString() {
+        return name + " (Grade " + grade + "): " + gpa;
+    }
+}
+              </code></pre>
+            </div>
+
+            <h4>Class Design Tips:</h4>
+            <ul>
+              <li>Use meaningful names for classes and methods</li>
+              <li>Keep instance variables private</li>
+              <li>Provide appropriate accessor and mutator methods</li>
+              <li>Include a toString() method</li>
+              <li>Consider implementing equals() and hashCode()</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Common Pitfalls and Debugging Tips -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Common Pitfalls and Debugging Tips</h2>
+            
+            <h4>Common Mistakes:</h4>
+            <ul>
+              <li><strong>Shadowing Variables</strong>: Parameter names matching instance variables
+                <div class="code-block">
+                  <pre><code class="language-java">
+public void setGPA(double gpa) {  // Wrong! Parameter shadows instance variable
+    gpa = gpa;  // Does nothing
+}
+public void setGPA(double gpa) {  // Correct! Use this keyword
+    this.gpa = gpa;
+}
+                  </code></pre>
+                </div>
+              </li>
+              <li><strong>Missing Constructor</strong>: Forgetting to initialize instance variables
+                <div class="code-block">
+                  <pre><code class="language-java">
+public class Student {
+    private String name;  // Wrong! Not initialized
+    public Student() { }  // Empty constructor
+}
+public class Student {
+    private String name = "";  // Correct! Initialize
+    public Student() { }
+}
+                  </code></pre>
+                </div>
+              </li>
+              <li><strong>Incorrect Access</strong>: Using wrong access modifiers
+                <div class="code-block">
+                  <pre><code class="language-java">
+public String name;  // Wrong! Should be private
+private String name;  // Correct! Encapsulation
+                  </code></pre>
+                </div>
+              </li>
+            </ul>
+
+            <h4>Debugging Tips:</h4>
+            <ul>
+              <li>Use toString() for object inspection</li>
+              <li>Check constructor initialization</li>
+              <li>Verify method parameter types</li>
+              <li>Test edge cases in methods</li>
+              <li>Use IDE debugger for object state</li>
+            </ul>
+
+            <h4>AP Exam Tips:</h4>
+            <ul>
+              <li>Know how to write class definitions</li>
+              <li>Understand encapsulation principles</li>
+              <li>Be able to write constructors</li>
+              <li>Know how to implement methods</li>
+              <li>Understand access modifiers</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- AP Exam-Style Practice Problems -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">AP Exam-Style Practice Problems</h2>
+            
+            <div class="practice-problem mb-4">
+              <h5>Problem 1: Class Definition</h5>
+              <p>Consider the following class definition:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+public class Book {
+    private String title;
+    private String author;
+    private int pages;
+
+    public Book(String t, String a, int p) {
+        title = t;
+        author = a;
+        pages = p;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+}
+                </code></pre>
+              </div>
+              <p>Which of the following is NOT a valid method to add to the Book class?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">public void setTitle(String t) { title = t; }</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">public String toString() { return title + " by " + author; }</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">public void setPages(int p) { pages = p; }</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">public void getTitle(String t) { title = t; }</div>
+              </div>
+              <div class="explanation">The correct answer is D. A getter method should not modify the instance variable and should not take parameters.</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 2: Constructor</h5>
+              <p>Consider the following class definition:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+public class Circle {
+    private double radius;
+    private double area;
+
+    public Circle(double r) {
+        radius = r;
+        area = Math.PI * radius * radius;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public double getArea() {
+        return area;
+    }
+}
+                </code></pre>
+              </div>
+              <p>What is the output of the following code?</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+Circle c = new Circle(2.0);
+System.out.println(c.getArea());
+                </code></pre>
+              </div>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">12.566370614359172</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">4.0</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">6.283185307179586</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">3.141592653589793</div>
+              </div>
+              <div class="explanation">The correct answer is A. The area is calculated as πr², where r = 2.0, resulting in approximately 12.57.</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 3: Method Implementation</h5>
+              <p>Consider the following class definition:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+public class Rectangle {
+    private int width;
+    private int height;
+
+    public Rectangle(int w, int h) {
+        width = w;
+        height = h;
+    }
+
+    public int getArea() {
+        return width * height;
+    }
+
+    public int getPerimeter() {
+        return 2 * (width + height);
+    }
+}
+                </code></pre>
+              </div>
+              <p>Which of the following methods would correctly determine if a rectangle is a square?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">public boolean isSquare() { return width == height; }</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">public boolean isSquare() { return width = height; }</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">public boolean isSquare() { return getArea() == getPerimeter(); }</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">public boolean isSquare() { return width * height == width + height; }</div>
+              </div>
+              <div class="explanation">The correct answer is A. A square has equal width and height, so we compare them using the equality operator.</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Practice Problems -->
         <div class="card mb-4 animate__animated animate__fadeInLeft">
           <div class="card-body">
@@ -277,6 +560,52 @@ public class StudentTest {
               <li>Use meaningful method and variable names.</li>
               <li>Include toString() method for debugging.</li>
             </ul>
+          </div>
+        </div>
+
+        <!-- Interactive Code Playground -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Interactive Code Playground</h2>
+            <p>Try out your own class writing code here!</p>
+            <div class="code-editor mb-3">
+              <textarea id="codeInput" class="form-control" rows="10" placeholder="// Write your class code here
+// Example:
+public class Student {
+    private String name;
+    private int age;
+    private double gpa;
+    
+    public Student(String name, int age, double gpa) {
+        this.name = name;
+        this.age = age;
+        this.gpa = gpa;
+    }
+    
+    public void displayInfo() {
+        System.out.println(&quot;Name: &quot; + name);
+        System.out.println(&quot;Age: &quot; + age);
+        System.out.println(&quot;GPA: &quot; + gpa);
+    }
+}
+
+// Create and use the class
+Student student = new Student(&quot;John&quot;, 18, 3.8);
+student.displayInfo();"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+            <div class="output-container mt-3">
+              <h5>Output:</h5>
+              <pre id="codeOutput" class="bg-dark text-white p-3 rounded" style="min-height: 100px;">Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.</pre>
+            </div>
+            <div class="mt-3">
+              <p class="text-muted">For actual code execution, we recommend using:</p>
+              <ul>
+                <li><a href="https://replit.com/languages/java" target="_blank">Replit Java</a></li>
+                <li><a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a></li>
+                <li><a href="https://www.onlinegdb.com/online_java_compiler" target="_blank">OnlineGDB</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -403,6 +732,16 @@ public class StudentTest {
       updateProgress();
       markUnitAsCompleted();
     });
+
+    // Code playground functionality
+    function runCode() {
+      const codeInput = document.getElementById('codeInput').value;
+      const codeOutput = document.getElementById('codeOutput');
+      
+      // Show a message about using an actual Java compiler
+      codeOutput.textContent = "Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.\n\n";
+      codeOutput.textContent += "Your code:\n" + codeInput;
+    }
   </script>
   
   <!-- Dynamic paths for GitHub Pages -->

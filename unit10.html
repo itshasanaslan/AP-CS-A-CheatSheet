@@ -146,80 +146,34 @@
           </div>
         </div>
 
-        <!-- Example Code: Basic Recursion -->
+        <!-- Example Code -->
         <div class="card mb-4 animate__animated animate__fadeInRight">
           <div class="card-body">
-            <h2 class="card-title">Example Code: Basic Recursion</h2>
+            <h2 class="card-title">Example Code</h2>
             <div class="code-block">
               <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
               <pre><code class="language-java">
-// Example: Basic Recursion in Java
-public class RecursionExamples {
+// Example: Recursion in Java
+public class RecursionExample {
     // Factorial using recursion
     public static int factorial(int n) {
-        // Base case
         if (n <= 1) {
-            return 1;
+            return 1;  // Base case
         }
-        // Recursive case
-        return n * factorial(n - 1);
+        return n * factorial(n - 1);  // Recursive case
     }
     
     // Fibonacci sequence using recursion
     public static int fibonacci(int n) {
-        // Base cases
         if (n <= 1) {
-            return n;
+            return n;  // Base case
         }
-        // Recursive case
-        return fibonacci(n - 1) + fibonacci(n - 2);
-    }
-    
-    // Sum of array elements using recursion
-    public static int sumArray(int[] arr, int index) {
-        // Base case
-        if (index >= arr.length) {
-            return 0;
-        }
-        // Recursive case
-        return arr[index] + sumArray(arr, index + 1);
-    }
-    
-    // Binary search using recursion
-    public static int binarySearch(int[] arr, int target, int left, int right) {
-        // Base case: element not found
-        if (left > right) {
-            return -1;
-        }
-        
-        int mid = left + (right - left) / 2;
-        
-        // Base case: element found
-        if (arr[mid] == target) {
-            return mid;
-        }
-        
-        // Recursive cases
-        if (arr[mid] > target) {
-            return binarySearch(arr, target, left, mid - 1);
-        }
-        return binarySearch(arr, target, mid + 1, right);
+        return fibonacci(n - 1) + fibonacci(n - 2);  // Recursive case
     }
     
     public static void main(String[] args) {
-        // Test factorial
         System.out.println("Factorial of 5: " + factorial(5));
-        
-        // Test fibonacci
         System.out.println("Fibonacci(6): " + fibonacci(6));
-        
-        // Test array sum
-        int[] numbers = {1, 2, 3, 4, 5};
-        System.out.println("Sum of array: " + sumArray(numbers, 0));
-        
-        // Test binary search
-        int[] sorted = {1, 3, 5, 7, 9, 11};
-        System.out.println("Index of 7: " + binarySearch(sorted, 7, 0, sorted.length - 1));
     }
 }
               </code></pre>
@@ -227,240 +181,83 @@ public class RecursionExamples {
           </div>
         </div>
 
-        <!-- Example Code: Advanced Recursion -->
+        <!-- Interactive Code Playground -->
         <div class="card mb-4 animate__animated animate__fadeInLeft">
           <div class="card-body">
-            <h2 class="card-title">Example Code: Advanced Recursion</h2>
-            <div class="code-block">
-              <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
-              <pre><code class="language-java">
-// Example: Advanced Recursion in Java
-public class AdvancedRecursion {
-    // Merge Sort implementation
-    public static void mergeSort(int[] arr) {
-        if (arr.length <= 1) {
-            return;
+            <h2 class="card-title">Interactive Code Playground</h2>
+            <p>Try out your own recursive code here!</p>
+            <div class="code-editor mb-3">
+              <textarea id="codeInput" class="form-control" rows="10" placeholder="// Write your recursive code here
+// Example:
+public class RecursiveExample {
+    // Sum of numbers from 1 to n
+    public static int sum(int n) {
+        if (n <= 1) {
+            return 1;  // Base case
         }
-        
-        // Split array into two halves
-        int mid = arr.length / 2;
-        int[] left = new int[mid];
-        int[] right = new int[arr.length - mid];
-        
-        // Copy elements
-        System.arraycopy(arr, 0, left, 0, mid);
-        System.arraycopy(arr, mid, right, 0, arr.length - mid);
-        
-        // Recursively sort the two halves
-        mergeSort(left);
-        mergeSort(right);
-        
-        // Merge the sorted halves
-        merge(arr, left, right);
-    }
-    
-    private static void merge(int[] arr, int[] left, int[] right) {
-        int i = 0, j = 0, k = 0;
-        
-        // Compare and merge elements
-        while (i < left.length && j < right.length) {
-            if (left[i] <= right[j]) {
-                arr[k++] = left[i++];
-            } else {
-                arr[k++] = right[j++];
-            }
-        }
-        
-        // Copy remaining elements
-        while (i < left.length) {
-            arr[k++] = left[i++];
-        }
-        while (j < right.length) {
-            arr[k++] = right[j++];
-        }
-    }
-    
-    // Tower of Hanoi problem
-    public static void towerOfHanoi(int n, char from, char to, char aux) {
-        if (n == 1) {
-            System.out.println("Move disk 1 from " + from + " to " + to);
-            return;
-        }
-        
-        towerOfHanoi(n - 1, from, aux, to);
-        System.out.println("Move disk " + n + " from " + from + " to " + to);
-        towerOfHanoi(n - 1, aux, to, from);
-    }
-    
-    // Permutations of a string
-    public static void permutations(String str) {
-        permutationsHelper("", str);
-    }
-    
-    private static void permutationsHelper(String prefix, String str) {
-        int n = str.length();
-        if (n == 0) {
-            System.out.println(prefix);
-            return;
-        }
-        
-        for (int i = 0; i < n; i++) {
-            permutationsHelper(prefix + str.charAt(i),
-                            str.substring(0, i) + str.substring(i + 1));
-        }
+        return n + sum(n - 1);  // Recursive case
     }
     
     public static void main(String[] args) {
-        // Test merge sort
-        int[] arr = {64, 34, 25, 12, 22, 11, 90};
-        System.out.println("Original array:");
-        printArray(arr);
-        mergeSort(arr);
-        System.out.println("Sorted array:");
-        printArray(arr);
-        
-        // Test Tower of Hanoi
-        System.out.println("\nTower of Hanoi solution:");
-        towerOfHanoi(3, 'A', 'C', 'B');
-        
-        // Test permutations
-        System.out.println("\nPermutations of 'ABC':");
-        permutations("ABC");
+        System.out.println(&quot;Sum of numbers from 1 to 5: &quot; + sum(5));
     }
-    
-    private static void printArray(int[] arr) {
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-    }
-}
-              </code></pre>
+}"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+            <div class="output-container mt-3">
+              <h5>Output:</h5>
+              <pre id="codeOutput" class="bg-dark text-white p-3 rounded" style="min-height: 100px;">Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.</pre>
+            </div>
+            <div class="mt-3">
+              <p class="text-muted">For actual code execution, we recommend using:</p>
+              <ul>
+                <li><a href="https://replit.com/languages/java" target="_blank">Replit Java</a></li>
+                <li><a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a></li>
+                <li><a href="https://www.onlinegdb.com/online_java_compiler" target="_blank">OnlineGDB</a></li>
+              </ul>
             </div>
           </div>
         </div>
 
-        <!-- Multiple Choice Practice -->
+        <!-- Multiple Choice Quiz -->
         <div class="card mb-4 animate__animated animate__fadeInRight">
           <div class="card-body">
-            <h2 class="card-title">Multiple Choice Practice</h2>
+            <h2 class="card-title">Multiple Choice Quiz</h2>
             
-            <!-- Question 1 -->
-            <div class="question mb-4">
-              <h4>Question 1:</h4>
-              <p>Consider the following recursive method:</p>
-              <pre><code class="language-java">
-public static int mystery(int n) {
-    if (n <= 1) {
-        return 1;
-    }
-    return n * mystery(n - 1);
-}
-              </code></pre>
-              <p>What does this method compute?</p>
+            <div class="practice-problem mb-4">
+              <h5>Question 1: Base Case</h5>
+              <p>What is the purpose of a base case in recursion?</p>
               <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 1)">A. Factorial of n</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. Sum of numbers from 1 to n</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. nth Fibonacci number</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. Power of 2 raised to n</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. Greatest common divisor</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">To stop the recursive calls and return a value</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">To make the recursive function more complex</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">To increase the number of recursive calls</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">To skip some recursive calls</div>
               </div>
-              <div class="explanation" id="explanation1">
-                <strong>Explanation:</strong> The answer is A. This is the factorial method. For example, mystery(5) = 5 * 4 * 3 * 2 * 1 = 120.
-              </div>
+              <div class="explanation">The correct answer is A. The base case provides a stopping condition for the recursion, preventing infinite recursive calls and allowing the function to return a value.</div>
             </div>
-            
-            <!-- Question 2 -->
-            <div class="question mb-4">
-              <h4>Question 2:</h4>
-              <p>What is the base case in the following recursive method?</p>
-              <pre><code class="language-java">
-public static int sum(int n) {
-    if (n <= 0) {
-        return 0;
-    }
-    return n + sum(n - 1);
-}
-              </code></pre>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. return n + sum(n - 1)</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">B. if (n <= 0) { return 0; }</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. public static int sum(int n)</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. There is no base case</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. The entire method is the base case</div>
-              </div>
-              <div class="explanation" id="explanation2">
-                <strong>Explanation:</strong> The answer is B. The base case is the condition that stops the recursion. In this case, when n is less than or equal to 0, the method returns 0 without making another recursive call.
-              </div>
-            </div>
-            
-            <!-- Question 3 -->
-            <div class="question mb-4">
-              <h4>Question 3:</h4>
-              <p>What is the output of the following code?</p>
-              <pre><code class="language-java">
-public static void printNumbers(int n) {
-    if (n <= 0) {
-        return;
-    }
-    System.out.print(n + " ");
-    printNumbers(n - 1);
-}
 
-public static void main(String[] args) {
-    printNumbers(3);
-}
-              </code></pre>
+            <div class="practice-problem mb-4">
+              <h5>Question 2: Recursive Case</h5>
+              <p>What is the recursive case in a recursive function?</p>
               <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. 1 2 3</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">B. 3 2 1</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. 1 1 1</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. 3 3 3</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. Nothing will be printed</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">The part that calls the function again with a smaller problem</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">The part that handles the base case</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">The part that prints the result</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">The part that initializes variables</div>
               </div>
-              <div class="explanation" id="explanation3">
-                <strong>Explanation:</strong> The answer is B. The method prints the current number before making the recursive call, so it prints in descending order: 3, then 2, then 1.
-              </div>
+              <div class="explanation">The correct answer is A. The recursive case breaks down the problem into smaller subproblems and calls the function again with these smaller problems.</div>
             </div>
-            
-            <!-- Question 4 -->
-            <div class="question mb-4">
-              <h4>Question 4:</h4>
-              <p>Which of the following is true about recursive methods?</p>
+
+            <div class="practice-problem mb-4">
+              <h5>Question 3: Stack Overflow</h5>
+              <p>What happens if a recursive function doesn't have a proper base case?</p>
               <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. They must return a value</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. They must have exactly one base case</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. They must be static methods</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">D. They must have at least one base case</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. They must be void methods</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">It causes a stack overflow error</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">It runs faster</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">It returns the wrong answer</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">It skips some calculations</div>
               </div>
-              <div class="explanation" id="explanation4">
-                <strong>Explanation:</strong> The answer is D. A recursive method must have at least one base case to prevent infinite recursion. It can have multiple base cases, and it can be either void or return a value.
-              </div>
-            </div>
-            
-            <!-- Question 5 -->
-            <div class="question mb-4">
-              <h4>Question 5:</h4>
-              <p>What is the time complexity of the following recursive method?</p>
-              <pre><code class="language-java">
-public static int fibonacci(int n) {
-    if (n <= 1) {
-        return n;
-    }
-    return fibonacci(n - 1) + fibonacci(n - 2);
-}
-              </code></pre>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. O(1)</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. O(n)</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">C. O(2^n)</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. O(log n)</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. O(n^2)</div>
-              </div>
-              <div class="explanation" id="explanation5">
-                <strong>Explanation:</strong> The answer is C. This recursive implementation of Fibonacci has exponential time complexity O(2^n) because each call makes two recursive calls, leading to a binary tree of calls with height n.
-              </div>
+              <div class="explanation">The correct answer is A. Without a proper base case, the recursive function will keep calling itself indefinitely until the call stack is full, resulting in a stack overflow error.</div>
             </div>
           </div>
         </div>
@@ -598,6 +395,16 @@ public static int fibonacci(int n) {
 
     // Call the function when the page loads
     highlightActiveLink();
+
+    // Code playground functionality
+    function runCode() {
+      const codeInput = document.getElementById('codeInput').value;
+      const codeOutput = document.getElementById('codeOutput');
+      
+      // Show a message about using an actual Java compiler
+      codeOutput.textContent = "Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.\n\n";
+      codeOutput.textContent += "Your code:\n" + codeInput;
+    }
   </script>
   
   <!-- Dynamic paths for GitHub Pages -->

@@ -225,6 +225,245 @@ public class AdvancedObjectsExample {
           </div>
         </div>
 
+        <!-- String Manipulation Techniques -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">String Manipulation Techniques</h2>
+            
+            <h4>Common String Methods:</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>length()</code></td>
+                    <td>Returns the length of the string</td>
+                    <td><code>"Hello".length()</code> → 5</td>
+                  </tr>
+                  <tr>
+                    <td><code>substring(start, end)</code></td>
+                    <td>Returns a portion of the string</td>
+                    <td><code>"Hello".substring(1, 4)</code> → "ell"</td>
+                  </tr>
+                  <tr>
+                    <td><code>indexOf(str)</code></td>
+                    <td>Returns the index of the first occurrence</td>
+                    <td><code>"Hello".indexOf("l")</code> → 2</td>
+                  </tr>
+                  <tr>
+                    <td><code>equals(str)</code></td>
+                    <td>Compares strings for equality</td>
+                    <td><code>"Hello".equals("hello")</code> → false</td>
+                  </tr>
+                  <tr>
+                    <td><code>compareTo(str)</code></td>
+                    <td>Compares strings lexicographically</td>
+                    <td><code>"apple".compareTo("banana")</code> → negative</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4>String Concatenation:</h4>
+            <div class="code-block">
+              <pre><code class="language-java">
+// Using + operator
+String name = "John";
+String greeting = "Hello, " + name + "!";  // "Hello, John!"
+
+// Using concat() method
+String s1 = "Hello";
+String s2 = "World";
+String result = s1.concat(" ").concat(s2);  // "Hello World"
+
+// Using StringBuilder (more efficient for multiple concatenations)
+StringBuilder sb = new StringBuilder();
+sb.append("Hello");
+sb.append(" ");
+sb.append("World");
+String finalString = sb.toString();  // "Hello World"
+              </code></pre>
+            </div>
+
+            <h4>String Comparison:</h4>
+            <div class="code-block">
+              <pre><code class="language-java">
+// Using equals() for content comparison
+String s1 = "Hello";
+String s2 = "hello";
+boolean isEqual = s1.equals(s2);  // false
+
+// Using equalsIgnoreCase() for case-insensitive comparison
+boolean isEqualIgnoreCase = s1.equalsIgnoreCase(s2);  // true
+
+// Using compareTo() for lexicographical comparison
+int comparison = s1.compareTo(s2);  // negative (H comes before h)
+              </code></pre>
+            </div>
+
+            <h4>String Manipulation Tips:</h4>
+            <ul>
+              <li>Strings are immutable - operations return new strings</li>
+              <li>Use <code>StringBuilder</code> for multiple concatenations</li>
+              <li>Remember that string indices start at 0</li>
+              <li>Be careful with <code>substring()</code> end index (exclusive)</li>
+              <li>Use <code>equals()</code> instead of <code>==</code> for string comparison</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Common Pitfalls and Debugging Tips -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Common Pitfalls and Debugging Tips</h2>
+            
+            <h4>Common Mistakes:</h4>
+            <ul>
+              <li><strong>String Comparison</strong>: Using <code>==</code> instead of <code>equals()</code>
+                <div class="code-block">
+                  <pre><code class="language-java">
+String s1 = "Hello";
+String s2 = new String("Hello");
+System.out.println(s1 == s2);  // false (compares references)
+System.out.println(s1.equals(s2));  // true (compares content)
+                  </code></pre>
+                </div>
+              </li>
+              <li><strong>Null References</strong>: Forgetting to check for null
+                <div class="code-block">
+                  <pre><code class="language-java">
+String s = null;
+System.out.println(s.length());  // NullPointerException
+                  </code></pre>
+                </div>
+              </li>
+              <li><strong>String Index Out of Bounds</strong>: Using invalid indices
+                <div class="code-block">
+                  <pre><code class="language-java">
+String s = "Hello";
+System.out.println(s.charAt(5));  // StringIndexOutOfBoundsException
+                  </code></pre>
+                </div>
+              </li>
+            </ul>
+
+            <h4>Debugging Tips:</h4>
+            <ul>
+              <li>Use <code>System.out.println()</code> to print object states</li>
+              <li>Check for null references before method calls</li>
+              <li>Verify string indices are within bounds</li>
+              <li>Use <code>StringBuilder</code> for complex string operations</li>
+              <li>Test edge cases (empty strings, null values)</li>
+            </ul>
+
+            <h4>AP Exam Tips:</h4>
+            <ul>
+              <li>Know the difference between <code>==</code> and <code>equals()</code></li>
+              <li>Understand string immutability</li>
+              <li>Be able to trace string method calls</li>
+              <li>Know when to use <code>StringBuilder</code></li>
+              <li>Understand string comparison methods</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- AP Exam-Style Practice Problems -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">AP Exam-Style Practice Problems</h2>
+            
+            <div class="practice-problem mb-4">
+              <h5>Problem 1: String Manipulation</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+String s = "Hello, World!";
+String result = s.substring(7, 12);
+System.out.println(result);
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">"World"</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">"World!"</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">"Worl"</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">"orld"</div>
+              </div>
+              <div class="explanation">The correct answer is A. The substring method returns characters from index 7 to 11 (end index is exclusive), which gives "World".</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 2: String Comparison</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+String s1 = "Hello";
+String s2 = new String("Hello");
+String s3 = s1;
+System.out.println(s1 == s2);
+System.out.println(s1 == s3);
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">false true</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">true true</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">false false</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">true false</div>
+              </div>
+              <div class="explanation">The correct answer is A. s1 and s2 are different objects (false), but s1 and s3 reference the same object (true).</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 3: StringBuilder</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World");
+sb.insert(5, ",");
+System.out.println(sb.toString());
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">"Hello, World"</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">"Hello World,"</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">"Hello,World"</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">"Hello World"</div>
+              </div>
+              <div class="explanation">The correct answer is A. The code first appends " World" to "Hello", then inserts "," at index 5, resulting in "Hello, World".</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 4: String Methods</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+String s = "Programming is fun!";
+int index = s.indexOf("is");
+String result = s.substring(index, index + 4);
+System.out.println(result);
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">"is f"</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">"is"</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">"is f"</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">"is fun"</div>
+              </div>
+              <div class="explanation">The correct answer is A. The index of "is" is 12, and substring(12, 16) returns "is f" (end index is exclusive).</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Multiple Choice Practice -->
         <div class="card mb-4 animate__animated animate__fadeInRight">
           <div class="card-body">
@@ -354,6 +593,81 @@ System.out.println(str.substring(6, 11));
               <li>Be careful with string comparison - use equals() instead of == for content comparison.</li>
               <li>Understand the difference between primitive types and their wrapper classes.</li>
             </ul>
+          </div>
+        </div>
+
+        <!-- Interactive Code Playground -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Interactive Code Playground</h2>
+            <p>Try out your own object-oriented code here! The code will run in a safe environment.</p>
+            <div class="code-editor mb-3">
+              <textarea id="codeInput" class="form-control" rows="10" placeholder="// Write your object-oriented code here
+// Example:
+String name = new String(&quot;Java&quot;);
+System.out.println(name.length());
+System.out.println(name.toUpperCase());
+
+// Create a Scanner object
+Scanner input = new Scanner(System.in);
+System.out.print(&quot;Enter your name: &quot;);
+String userName = input.nextLine();
+System.out.println(&quot;Hello, &quot; + userName + &quot;!&quot;);"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+            <div class="output-container mt-3">
+              <h5>Output:</h5>
+              <pre id="codeOutput" class="bg-dark text-white p-3 rounded" style="min-height: 100px;">Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.</pre>
+            </div>
+            <div class="mt-3">
+              <p class="text-muted">For actual code execution, we recommend using:</p>
+              <ul>
+                <li><a href="https://replit.com/languages/java" target="_blank">Replit Java</a></li>
+                <li><a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a></li>
+                <li><a href="https://www.onlinegdb.com/online_java_compiler" target="_blank">OnlineGDB</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple Choice Quiz -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Test Your Knowledge</h2>
+            <div class="quiz-container">
+              <div class="quiz-question mb-4">
+                <h5>1. What is the difference between a class and an object?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">A class is a blueprint, while an object is an instance of that class</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">A class is an instance, while an object is a blueprint</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">There is no difference</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">A class is for primitive types, while an object is for reference types</div>
+                </div>
+                <div class="explanation">The correct answer is A. A class is a blueprint that defines the properties and behaviors of objects, while an object is a specific instance created from that class.</div>
+              </div>
+
+              <div class="quiz-question mb-4">
+                <h5>2. Which of the following correctly creates a String object?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">String s = "Hello";</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">String s = new String("Hello");</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">String s = new String();</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">All of the above</div>
+                </div>
+                <div class="explanation">The correct answer is D. All of the above are valid ways to create a String object in Java. The first method uses string literals, while the others use the new keyword.</div>
+              </div>
+
+              <div class="quiz-question mb-4">
+                <h5>3. What is the purpose of the Scanner class?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">To read input from the user</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">To scan files on the computer</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">To scan network connections</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">To scan memory locations</div>
+                </div>
+                <div class="explanation">The correct answer is A. The Scanner class is used to read input from various sources, most commonly from the keyboard (System.in).</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -498,6 +812,45 @@ System.out.println(str.substring(6, 11));
       updateProgress();
       markUnitAsCompleted();
     });
+
+    // Code playground functionality
+    function runCode() {
+      const codeInput = document.getElementById('codeInput').value;
+      const codeOutput = document.getElementById('codeOutput');
+      
+      // Show a message about using an actual Java compiler
+      codeOutput.textContent = "Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.\n\n";
+      codeOutput.textContent += "Your code:\n" + codeInput;
+    }
+
+    // Quiz functionality
+    function checkAnswer(element, correctAnswer) {
+      const options = element.parentElement.querySelectorAll('.mc-option');
+      const explanation = element.parentElement.nextElementSibling;
+      
+      // Remove previous selections
+      options.forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'incorrect');
+      });
+      
+      // Mark selected option
+      element.classList.add('selected');
+      
+      // Check if correct
+      if (element.getAttribute('onclick').includes(correctAnswer)) {
+        element.classList.add('correct');
+        explanation.style.display = 'block';
+      } else {
+        element.classList.add('incorrect');
+        // Find and mark correct answer
+        options.forEach(opt => {
+          if (opt.getAttribute('onclick').includes(correctAnswer)) {
+            opt.classList.add('correct');
+          }
+        });
+        explanation.style.display = 'block';
+      }
+    }
   </script>
   
   <!-- Dynamic paths for GitHub Pages -->

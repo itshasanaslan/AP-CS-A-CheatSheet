@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css">
+  <!-- Mobile Fixes CSS -->
+  <link rel="stylesheet" href="mobile-fixes.css">
   <style>
     .loading {
       position: fixed;
@@ -228,98 +230,226 @@ public class AdvancedOperations {
           </div>
         </div>
 
-        <!-- Multiple Choice Practice -->
-        <div class="card mb-4 animate__animated animate__fadeInRight">
+        <!-- Common Pitfalls and Debugging Tips -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
           <div class="card-body">
-            <h2 class="card-title">Multiple Choice Practice</h2>
+            <h2 class="card-title">Common Pitfalls and Debugging Tips</h2>
             
-            <!-- Question 1 -->
-            <div class="question mb-4">
-              <h4>Question 1:</h4>
-              <p>Which of the following is NOT a primitive data type in Java?</p>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. int</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. double</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. boolean</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">D. String</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. char</div>
-              </div>
-              <div class="explanation" id="explanation1">
-                <strong>Explanation:</strong> The answer is D. String is a class in Java, not a primitive data type. The primitive data types are: byte, short, int, long, float, double, boolean, and char.
-              </div>
-            </div>
+            <h4>Common Mistakes:</h4>
+            <ul>
+              <li><strong>Integer Division</strong>: Remember that dividing two integers results in integer division (truncation)
+                <div class="code-block">
+                  <pre><code class="language-java">
+int result = 5 / 2;  // result is 2, not 2.5
+double correct = 5.0 / 2;  // correct is 2.5
+                  </code></pre>
+                </div>
+              </li>
+              <li><strong>Type Casting</strong>: Be careful with narrowing conversions
+                <div class="code-block">
+                  <pre><code class="language-java">
+double d = 3.7;
+int i = (int) d;  // i is 3 (truncates decimal)
+                  </code></pre>
+                </div>
+              </li>
+              <li><strong>Character vs String</strong>: Remember that char literals use single quotes
+                <div class="code-block">
+                  <pre><code class="language-java">
+char c = 'A';  // correct
+char wrong = "A";  // error: String cannot be converted to char
+                  </code></pre>
+                </div>
+              </li>
+            </ul>
+
+            <h4>Debugging Tips:</h4>
+            <ul>
+              <li>Use <code>System.out.println()</code> to print variable values at key points</li>
+              <li>Check for integer overflow when working with large numbers</li>
+              <li>Verify type casting is working as expected</li>
+              <li>Use parentheses to clarify operator precedence</li>
+              <li>Test edge cases (e.g., division by zero, maximum/minimum values)</li>
+            </ul>
+
+            <h4>AP Exam Tips:</h4>
+            <ul>
+              <li>Know the range of each primitive type</li>
+              <li>Understand operator precedence rules</li>
+              <li>Be able to trace code with multiple operations</li>
+              <li>Recognize common integer division scenarios</li>
+              <li>Know when to use type casting</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- AP Exam-Style Practice Problems -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">AP Exam-Style Practice Problems</h2>
             
-            <!-- Question 2 -->
-            <div class="question mb-4">
-              <h4>Question 2:</h4>
-              <p>What is the result of the following expression?</p>
-              <pre><code class="language-java">
+            <div class="practice-problem mb-4">
+              <h5>Problem 1: Variable Declaration and Initialization</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
 int x = 5;
 double y = 2.0;
-int result = (int)(x * y);
-              </code></pre>
+int z = (int) (x / y);
+System.out.println(z);
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
               <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. 2</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. 2.5</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">C. 10</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. 10.0</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. Compilation error</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">2</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">2.5</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">3</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">2.0</div>
               </div>
-              <div class="explanation" id="explanation2">
-                <strong>Explanation:</strong> The answer is C. First, x * y is calculated as 5 * 2.0 = 10.0. Then, the result is cast to an int, giving 10.
-              </div>
+              <div class="explanation">The correct answer is A. The division x/y results in 2.5, but when cast to an int, the decimal part is truncated, resulting in 2.</div>
             </div>
-            
-            <!-- Question 3 -->
-            <div class="question mb-4">
-              <h4>Question 3:</h4>
-              <p>Which operator has the highest precedence in Java?</p>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 2: Operator Precedence</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+int a = 3;
+int b = 4;
+int c = 5;
+int result = a + b * c;
+System.out.println(result);
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
               <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. +</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. *</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. =</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">D. ()</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. %</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">35</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">23</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">60</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">12</div>
               </div>
-              <div class="explanation" id="explanation3">
-                <strong>Explanation:</strong> The answer is D. Parentheses () have the highest precedence in Java and are used to explicitly control the order of operations.
-              </div>
+              <div class="explanation">The correct answer is B. Multiplication has higher precedence than addition, so b * c is evaluated first (4 * 5 = 20), then a is added (3 + 20 = 23).</div>
             </div>
-            
-            <!-- Question 4 -->
-            <div class="question mb-4">
-              <h4>Question 4:</h4>
-              <p>What is the value of x after the following code executes?</p>
-              <pre><code class="language-java">
-int x = 5;
-x += 3;
-x *= 2;
-              </code></pre>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 3: Type Casting</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+double d = 3.7;
+int i = (int) d;
+double result = i + d;
+System.out.println(result);
+                </code></pre>
+              </div>
+              <p>What is printed as a result of executing the code segment?</p>
               <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. 5</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. 8</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">C. 16</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. 10</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. 13</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">6.7</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">7.4</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">7.0</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">6.0</div>
               </div>
-              <div class="explanation" id="explanation4">
-                <strong>Explanation:</strong> The answer is C. First, x += 3 adds 3 to x, making it 8. Then, x *= 2 multiplies x by 2, making it 16.
-              </div>
+              <div class="explanation">The correct answer is A. When d is cast to an int, it becomes 3. Then 3 + 3.7 = 6.7. The int is automatically promoted to double for the addition.</div>
             </div>
-            
-            <!-- Question 5 -->
-            <div class="question mb-4">
-              <h4>Question 5:</h4>
-              <p>Which of the following is a valid way to declare a constant in Java?</p>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. const int MAX = 100;</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">B. final int MAX = 100;</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. static int MAX = 100;</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. constant int MAX = 100;</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. immutable int MAX = 100;</div>
+
+            <div class="practice-problem mb-4">
+              <h5>Problem 4: Character Operations</h5>
+              <p>Consider the following code segment:</p>
+              <div class="code-block">
+                <pre><code class="language-java">
+char c = 'A';
+int i = c + 1;
+char next = (char) i;
+System.out.println(next);
+                </code></pre>
               </div>
-              <div class="explanation" id="explanation5">
-                <strong>Explanation:</strong> The answer is B. In Java, the keyword 'final' is used to declare constants. The value of a final variable cannot be changed after initialization.
+              <p>What is printed as a result of executing the code segment?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">'B'</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">66</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">'A'</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">65</div>
+              </div>
+              <div class="explanation">The correct answer is A. Characters are stored as Unicode values. 'A' is 65, so 65 + 1 = 66, which is 'B' in Unicode.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Code Playground -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Interactive Code Playground</h2>
+            <p>Try out your own primitive types code here!</p>
+            <div class="code-editor mb-3">
+              <textarea id="codeInput" class="form-control" rows="10" placeholder="// Write your primitive types code here
+// Example:
+int age = 18;
+double height = 5.9;
+char grade = 'A';
+boolean isStudent = true;
+
+System.out.println(&quot;Age: &quot; + age);
+System.out.println(&quot;Height: &quot; + height);
+System.out.println(&quot;Grade: &quot; + grade);
+System.out.println(&quot;Is student? &quot; + isStudent);
+
+// Type casting
+double pi = 3.14159;
+int roundedPi = (int) pi;
+System.out.println(&quot;Rounded Pi: &quot; + roundedPi);"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+            <div class="output-container mt-3">
+              <h5>Output:</h5>
+              <pre id="codeOutput" class="bg-dark text-white p-3 rounded" style="min-height: 100px;">Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.</pre>
+            </div>
+            <div class="mt-3">
+              <p class="text-muted">For actual code execution, we recommend using:</p>
+              <ul>
+                <li><a href="https://replit.com/languages/java" target="_blank">Replit Java</a></li>
+                <li><a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a></li>
+                <li><a href="https://www.onlinegdb.com/online_java_compiler" target="_blank">OnlineGDB</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple Choice Quiz -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
+          <div class="card-body">
+            <h2 class="card-title">Test Your Knowledge</h2>
+            <div class="quiz-container">
+              <div class="quiz-question mb-4">
+                <h5>1. Which of the following is NOT a primitive type in Java?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">int</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">double</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">String</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">boolean</div>
+                </div>
+                <div class="explanation">The correct answer is C. String. String is a class in Java, not a primitive type. The primitive types in Java are: byte, short, int, long, float, double, char, and boolean.</div>
+              </div>
+
+              <div class="quiz-question mb-4">
+                <h5>2. What is the result of the expression: 5 / 2?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">2.5</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">2</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">2.0</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">2.5f</div>
+                </div>
+                <div class="explanation">The correct answer is B. 2. When dividing two integers, Java performs integer division and truncates the decimal portion. To get 2.5, you would need to use floating-point numbers (5.0 / 2.0).</div>
+              </div>
+
+              <div class="quiz-question mb-4">
+                <h5>3. Which of the following is a valid declaration of a char?</h5>
+                <div class="mc-options">
+                  <div class="mc-option" onclick="checkAnswer(this, 'a')">char c = 'A';</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'b')">char c = "A";</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'c')">char c = 65;</div>
+                  <div class="mc-option" onclick="checkAnswer(this, 'd')">char c = 'AB';</div>
+                </div>
+                <div class="explanation">The correct answers are A and C. A char can be declared using a single character in single quotes ('A') or using its ASCII value (65). Double quotes are used for Strings, and a char can only hold one character.</div>
               </div>
             </div>
           </div>
@@ -573,6 +703,45 @@ x *= 2;
         });
       }
     });
+
+    // Code playground functionality
+    function runCode() {
+      const codeInput = document.getElementById('codeInput').value;
+      const codeOutput = document.getElementById('codeOutput');
+      
+      // Show a message about using an actual Java compiler
+      codeOutput.textContent = "Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.\n\n";
+      codeOutput.textContent += "Your code:\n" + codeInput;
+    }
+
+    // Quiz functionality
+    function checkAnswer(element, correctAnswer) {
+      const options = element.parentElement.querySelectorAll('.mc-option');
+      const explanation = element.parentElement.nextElementSibling;
+      
+      // Remove previous selections
+      options.forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'incorrect');
+      });
+      
+      // Mark selected option
+      element.classList.add('selected');
+      
+      // Check if correct
+      if (element.getAttribute('onclick').includes(correctAnswer)) {
+        element.classList.add('correct');
+        explanation.style.display = 'block';
+      } else {
+        element.classList.add('incorrect');
+        // Find and mark correct answer
+        options.forEach(opt => {
+          if (opt.getAttribute('onclick').includes(correctAnswer)) {
+            opt.classList.add('correct');
+          }
+        });
+        explanation.style.display = 'block';
+      }
+    }
   </script>
   
   <!-- Dynamic paths for GitHub Pages -->

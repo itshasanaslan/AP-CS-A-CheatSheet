@@ -173,100 +173,22 @@
               <button class="btn btn-sm btn-copy" onclick="copyCode(this)">Copy</button>
               <pre><code class="language-java">
 // Example: Working with 2D Arrays in Java
-public class TwoDArrayExamples {
+public class TwoDArrayExample {
   public static void main(String[] args) {
-    // 2D array declaration and initialization
-    int[][] matrix = {
-      {1, 2, 3},
-      {4, 5, 6},
-      {7, 8, 9}
-    };
+    // Create a 2D array
+    int[][] matrix = new int[3][3];
     
-    // Row-major traversal
-    System.out.println("Row-major traversal:");
+    // Initialize with values
+    for (int i = 0; i < matrix.length; i++) {
+      for (int j = 0; j < matrix[i].length; j++) {
+        matrix[i][j] = i + j;
+      }
+    }
+    
+    // Print the matrix
     for (int i = 0; i < matrix.length; i++) {
       for (int j = 0; j < matrix[i].length; j++) {
         System.out.print(matrix[i][j] + " ");
-      }
-      System.out.println();
-    }
-    
-    // Column-major traversal
-    System.out.println("\nColumn-major traversal:");
-    for (int j = 0; j < matrix[0].length; j++) {
-      for (int i = 0; i < matrix.length; i++) {
-        System.out.print(matrix[i][j] + " ");
-      }
-      System.out.println();
-    }
-    
-    // Sum of all elements
-    int sum = calculateSum(matrix);
-    System.out.println("\nSum of all elements: " + sum);
-    
-    // Find maximum value
-    int max = findMax(matrix);
-    System.out.println("Maximum value: " + max);
-    
-    // Transpose matrix
-    System.out.println("\nTransposed matrix:");
-    int[][] transposed = transpose(matrix);
-    printMatrix(transposed);
-    
-    // Ragged array example
-    int[][] ragged = {
-      {1, 2, 3},
-      {4, 5},
-      {6, 7, 8, 9}
-    };
-    
-    System.out.println("\nRagged array:");
-    printMatrix(ragged);
-  }
-  
-  // Calculate sum of all elements
-  public static int calculateSum(int[][] arr) {
-    int sum = 0;
-    for (int[] row : arr) {
-      for (int num : row) {
-        sum += num;
-      }
-    }
-    return sum;
-  }
-  
-  // Find maximum value
-  public static int findMax(int[][] arr) {
-    int max = arr[0][0];
-    for (int[] row : arr) {
-      for (int num : row) {
-        if (num > max) {
-          max = num;
-        }
-      }
-    }
-    return max;
-  }
-  
-  // Transpose matrix
-  public static int[][] transpose(int[][] arr) {
-    int rows = arr.length;
-    int cols = arr[0].length;
-    int[][] result = new int[cols][rows];
-    
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        result[j][i] = arr[i][j];
-      }
-    }
-    return result;
-  }
-  
-  // Print matrix
-  public static void printMatrix(int[][] arr) {
-    for (int[] row : arr) {
-      for (int num : row) {
-        System.out.print(num + " ");
       }
       System.out.println();
     }
@@ -277,106 +199,87 @@ public class TwoDArrayExamples {
           </div>
         </div>
 
-        <!-- Multiple Choice Practice -->
-        <div class="card mb-4 animate__animated animate__fadeInRight">
+        <!-- Interactive Code Playground -->
+        <div class="card mb-4 animate__animated animate__fadeInLeft">
           <div class="card-body">
-            <h2 class="card-title">Multiple Choice Practice</h2>
-            
-            <!-- Question 1 -->
-            <div class="question mb-4">
-              <h4>Question 1:</h4>
-              <p>What is the output of the following code?</p>
-              <pre><code class="language-java">
-int[][] arr = {
-    {1, 2, 3},
-    {4, 5, 6},
-    {7, 8, 9}
-};
-System.out.println(arr[1][2]);
-              </code></pre>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. 2</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. 5</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">C. 6</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. 8</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. 9</div>
-              </div>
-              <div class="explanation" id="explanation1">
-                <strong>Explanation:</strong> The answer is C. In a 2D array, arr[1][2] accesses the element at row 1 (second row) and column 2 (third column), which is 6.
-              </div>
-            </div>
-            
-            <!-- Question 2 -->
-            <div class="question mb-4">
-              <h4>Question 2:</h4>
-              <p>Which of the following is NOT a valid 2D array declaration?</p>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. int[][] arr = new int[3][4];</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. int[][] arr = {{1,2}, {3,4}};</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">C. int[][] arr = new int[3][];</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">D. int[][] arr = new int[][3];</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. int[][] arr = new int[3][3];</div>
-              </div>
-              <div class="explanation" id="explanation2">
-                <strong>Explanation:</strong> The answer is D. When declaring a 2D array, you must specify the number of rows first. The syntax new int[][3] is invalid because it's missing the number of rows.
-              </div>
-            </div>
-            
-            <!-- Question 3 -->
-            <div class="question mb-4">
-              <h4>Question 3:</h4>
-              <p>What is the time complexity of traversing a 2D array with n rows and m columns?</p>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. O(1)</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. O(log n)</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">C. O(n * m)</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. O(n²)</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. O(m²)</div>
-              </div>
-              <div class="explanation" id="explanation3">
-                <strong>Explanation:</strong> The answer is C. Traversing a 2D array requires visiting each element once, which means n * m operations, where n is the number of rows and m is the number of columns.
-              </div>
-            </div>
-            
-            <!-- Question 4 -->
-            <div class="question mb-4">
-              <h4>Question 4:</h4>
-              <p>What is the output of the following code?</p>
-              <pre><code class="language-java">
-int[][] arr = new int[2][3];
-for (int i = 0; i < arr.length; i++) {
-    for (int j = 0; j < arr[i].length; j++) {
-        arr[i][j] = i + j;
+            <h2 class="card-title">Interactive Code Playground</h2>
+            <p>Try out your own 2D array code here!</p>
+            <div class="code-editor mb-3">
+              <textarea id="codeInput" class="form-control" rows="10" placeholder="// Write your 2D array code here
+// Example:
+// Create a 2D array
+int[][] matrix = new int[3][3];
+
+// Initialize with values
+for (int i = 0; i < matrix.length; i++) {
+    for (int j = 0; j < matrix[i].length; j++) {
+        matrix[i][j] = i * j;
     }
 }
-System.out.println(arr[1][2]);
-              </code></pre>
-              <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. 1</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. 2</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">C. 3</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. 4</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. 5</div>
-              </div>
-              <div class="explanation" id="explanation4">
-                <strong>Explanation:</strong> The answer is C. The nested loops fill the array with values where each element is the sum of its row and column indices. For arr[1][2], i=1 and j=2, so 1+2=3.
-              </div>
+
+// Print the matrix
+for (int i = 0; i < matrix.length; i++) {
+    for (int j = 0; j < matrix[i].length; j++) {
+        System.out.print(matrix[i][j] + &quot; &quot;);
+    }
+    System.out.println();
+}"></textarea>
             </div>
+            <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+            <div class="output-container mt-3">
+              <h5>Output:</h5>
+              <pre id="codeOutput" class="bg-dark text-white p-3 rounded" style="min-height: 100px;">Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.</pre>
+            </div>
+            <div class="mt-3">
+              <p class="text-muted">For actual code execution, we recommend using:</p>
+              <ul>
+                <li><a href="https://replit.com/languages/java" target="_blank">Replit Java</a></li>
+                <li><a href="https://www.jdoodle.com/online-java-compiler/" target="_blank">JDoodle</a></li>
+                <li><a href="https://www.onlinegdb.com/online_java_compiler" target="_blank">OnlineGDB</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple Choice Quiz -->
+        <div class="card mb-4 animate__animated animate__fadeInRight">
+          <div class="card-body">
+            <h2 class="card-title">Multiple Choice Quiz</h2>
             
-            <!-- Question 5 -->
-            <div class="question mb-4">
-              <h4>Question 5:</h4>
-              <p>Which of the following is true about ragged arrays?</p>
+            <div class="practice-problem mb-4">
+              <h5>Question 1: 2D Array Declaration</h5>
+              <p>Which of the following correctly declares a 2D array of integers with 3 rows and 4 columns?</p>
               <div class="mc-options">
-                <div class="mc-option" onclick="selectOption(this, 0)">A. They must be square</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">B. They must be rectangular</div>
-                <div class="mc-option" onclick="selectOption(this, 1)">C. They can have rows of different lengths</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">D. They must be triangular</div>
-                <div class="mc-option" onclick="selectOption(this, 0)">E. They must be symmetric</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">int[][] arr = new int[3][4];</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">int arr[][] = new int[4][3];</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">int[] arr[] = new int[3,4];</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">int arr = new int[3][4];</div>
               </div>
-              <div class="explanation" id="explanation5">
-                <strong>Explanation:</strong> The answer is C. Ragged arrays are 2D arrays where each row can have a different length. This is different from rectangular arrays where all rows must have the same length.
+              <div class="explanation">The correct answer is A. In Java, 2D arrays are declared with the syntax int[][] arr = new int[rows][columns].</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Question 2: Ragged Arrays</h5>
+              <p>What is a ragged array?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">A 2D array where each row has a different length</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">A 2D array with missing elements</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">A 2D array with null values</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">A 2D array with duplicate values</div>
               </div>
+              <div class="explanation">The correct answer is A. A ragged array is a 2D array where each row can have a different number of columns.</div>
+            </div>
+
+            <div class="practice-problem mb-4">
+              <h5>Question 3: 2D Array Traversal</h5>
+              <p>What is the correct way to traverse a 2D array?</p>
+              <div class="mc-options">
+                <div class="mc-option" onclick="checkAnswer(this, 'a')">Using nested for loops</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'b')">Using a single for loop</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'c')">Using a while loop</div>
+                <div class="mc-option" onclick="checkAnswer(this, 'd')">Using a do-while loop</div>
+              </div>
+              <div class="explanation">The correct answer is A. 2D arrays are typically traversed using nested for loops, with the outer loop iterating through rows and the inner loop through columns.</div>
             </div>
           </div>
         </div>
@@ -530,6 +433,16 @@ System.out.println(arr[1][2]);
       updateProgress();
       markUnitAsCompleted();
     });
+
+    // Code playground functionality
+    function runCode() {
+      const codeInput = document.getElementById('codeInput').value;
+      const codeOutput = document.getElementById('codeOutput');
+      
+      // Show a message about using an actual Java compiler
+      codeOutput.textContent = "Note: This is a simulated environment. For actual Java code execution, please use an IDE or online Java compiler.\n\n";
+      codeOutput.textContent += "Your code:\n" + codeInput;
+    }
   </script>
   
   <!-- Dynamic paths for GitHub Pages -->
